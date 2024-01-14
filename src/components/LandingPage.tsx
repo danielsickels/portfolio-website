@@ -4,17 +4,17 @@ import Navbar from "./Navbar";
 
 const LandingPage: React.FC = () => {
   return (
-    <div>
+    <div className="h-screen">
       <Navbar />
       <div className="container mx-auto p-8">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Welcome to My Next.js App</h1>
-          <p className="text-lg mb-6">
-            Explore our innovative solutions and projects.
+          <h1 className="text-4xl font-extrabold mb-4">Welcome to My Portfoooolio Project</h1>
+          <p className="text-lg mb-12">
+            Explore sometin'.
           </p>
-          <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+          <button className="bg-red-500 hover:bg-blue-800 text-black font-extrabold py-4 px-5 rounded inline-flex items-center">
             Learn More
-            <BiRightArrowAlt className="ml-2" />
+            <BiRightArrowAlt className="ml-2 text-2x2" />
           </button>
         </div>
       </div>

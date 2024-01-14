@@ -4,24 +4,24 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --night-background-start-rgb: 9, 20, 38;      /* Dark blue start color (night) */
+  --night-background-end-rgb: 0, 0, 102;        /* Dark blue end color (night) */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-start-rgb: var(--night-background-start-rgb);
+    --background-end-rgb: var(--night-background-end-rgb);
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      to bottom,
-      transparent,
+      to top,
+      rgb(var(--background-start-rgb)),
       rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    ) 100vh;
+  background-size: cover; /* Added to ensure the gradient covers the entire viewport */
 }
