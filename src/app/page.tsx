@@ -1,14 +1,16 @@
+"use client";
+
 // pages/index.tsx
 import type { NextPage } from "next";
 import Link from "next/link";
 import Navbar from "../components/common/Navbar";
-// import DynamicBackground from "../components/common/DynamicBackground";
+import StreakingElements from "../components/common/StreakingElements";
 
 const Home: NextPage = () => {
   return (
     <div>
       <Navbar />
-      {/* <DynamicBackground /> */}
+      <StreakingElements />
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
           {/* Apply dark mode conditional classes */}
