@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { GiConsoleController } from "react-icons/gi";
 
 const generateRandomClasses = () => {
     const sizes = ["w-6 h-6", "w-12 h-12", "w-16 h-16", "w-24 h-24"];
     const colors = [
-        "bg-red-500",
-        "bg-green-500",
-        "bg-blue-500",
-        "bg-yellow-500",
-        "bg-purple-500",
-        "bg-pink-500",
+        "bg-red-600",
+        "bg-green-600",
+        "bg-blue-600",
+        "bg-yellow-600",
+        "bg-purple-600",
+        "bg-pink-600",
     ];
 
     const size = sizes[Math.floor(Math.random() * sizes.length)];
@@ -17,91 +18,112 @@ const generateRandomClasses = () => {
     return `${size} ${color} animate-pulse`;
     };
 
-    function AnimatedElement({ onEnd, startPosition}): React.JSX.Element {
-    const [position, setPosition] = useState(startPosition);
-    const [opacity, setOpacity] = useState(1);
-
-    useEffect(() => {
+    function AnimatedElement({
+        onEnd,
+        startPosition,
+    }: {
+        onEnd: () => void;
+        startPosition: { top: number; left: number };
+    }): React.JSX.Element {
+        const [position, setPosition] = useState(startPosition);
+        const [opacity, setOpacity] = useState(1);
+    
+        useEffect(() => {
         const duration = Math.random() * 5000 + 5000;
         const interval = 16; // 60 frames per second
-
+    
         const frames = duration / interval;
         let currentFrame = 0;
-
+    
         const moveElement = () => {
             currentFrame++;
-
+    
             if (currentFrame <= frames) {
-                setPosition((prevPosition: { top: number; }) => ({
-                    top: prevPosition.top + 2, // Adjust the speed by changing this value
-                    left: startPosition.left,
-                }));
-
-                setOpacity((prevOpacity) => prevOpacity - 3 / frames);
+            // Calculate the new position based on the center
+            setPosition((prevPosition: { top: number; left: number }) => ({
+                top: prevPosition.top + 1,
+                left: prevPosition.left + 1,
+            }));
+    
+            setOpacity((prevOpacity) => prevOpacity + 2 / frames);
             } else {
-                onEnd();
+            onEnd();
             }
         };
-
+    
         const intervalId = setInterval(moveElement, interval);
-
+    
         return () => clearInterval(intervalId);
-    }, [onEnd, startPosition]);
-
-    return (
+        }, [onEnd, startPosition]);
+    
+        return (
         <div
             className={`absolute ${generateRandomClasses()}`}
             style={{
-                ...position,
-                opacity: opacity,
+            ...position,
+            opacity: opacity,
+            left: `${position.left - 150}%`, // Adjust to center the expansion
+            top: `${position.top - 50}%`, // Adjust to center the expansion
             }}
         ></div>
-    );
-}
+        );
+    }
+    
 
-    const StreakingElements = ({ creationInterval = 100 }) => {
-    const [elements, setElements] = useState<React.ReactNode[]>([]);
-
-    const addElement = () => {
-        const startPosition = {
-        top: -50, // Adjust the starting position off-screen
-        left: Math.random() * 100 + "%",
+    const StreakingElements = ({ maxElements = 15, creationInterval = 100 }) => {
+        const [elements, setElements] = useState<React.ReactNode[]>(Array(maxElements).fill(null));
+    
+        const addElement = () => {
+        setElements((prevElements) => {
+            const newElements = [...prevElements];
+            const emptyIndex = newElements.indexOf(null);
+    
+            if (emptyIndex !== -1) {
+            const startPosition = {
+                top: -50,
+                left: Math.random() * 100,
+            };
+    
+            newElements[emptyIndex] = (
+                <AnimatedElement
+                key={Math.random()}
+                onEnd={() => removeElement(emptyIndex)}
+                startPosition={startPosition}
+                />
+            );
+            }
+    
+            return newElements;
+        });
         };
-
-        setElements((prevElements) => [
-        ...prevElements,
-        <AnimatedElement
-            key={Math.random()}
-            onEnd={() => removeElement()}
-            startPosition={startPosition}
-            // removeElement={() => removeElement()}
-        />,
-        ]);
-    };
-
-    const removeElement = () => {
-        setElements((prevElements) => prevElements.slice(1));
-    };
-
-    useEffect(() => {
+    
+        const removeElement = (index: number) => {
+        setElements((prevElements) => {
+            const newElements = [...prevElements];
+            newElements[index] = null;
+            return newElements;
+        });
+        };
+    
+        useEffect(() => {
         addElement();
         const interval = setInterval(addElement, creationInterval);
-
+    
         return () => clearInterval(interval);
-    }, [creationInterval]);
-
-    return (
+        }, [creationInterval]);
+    
+        return (
         <div className="fixed top-0 left-0 w-full h-full z-[-1] overflow-hidden">
-        {elements}
-        <div
+            {elements}
+            <div
             className="absolute top-0 left-0 w-full h-full"
             style={{
-            backgroundColor: `rgba(var(--background-start-rgb), 0.8)`,
-            zIndex: 1,
+                backgroundColor: `rgba(var(--background-start-rgb), 0.8)`,
+                zIndex: 1,
             }}
-        ></div>
+            ></div>
         </div>
-    );
+        );
     };
 
 export default StreakingElements;
