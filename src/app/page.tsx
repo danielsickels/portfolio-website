@@ -14,7 +14,7 @@ const Home: NextPage = () => {
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
           {/* Apply dark mode conditional classes */}
-          <h1 className="text-5xl font-bold text-black dark:text-white">
+          <h1 className="text-6xl font-bold text-black dark:text-white">
             Danny Sickels
           </h1>
           <p className="mt-4 text-2xl text-black dark:text-white">

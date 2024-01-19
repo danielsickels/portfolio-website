@@ -30,7 +30,7 @@ const Contact: React.FC = () => {
   return (
     <div className= "h-screen">
       <div className="container mx-auto p-8">
-        <h1 className="text-4xl font-bold text-center mb-4 text-white">Get In Touch</h1>
+        <h1 className="text-4xl font-bold text-center mb-4 text-black dark:text-white">Get In Touch</h1>
         <div className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -84,7 +84,7 @@ const Contact: React.FC = () => {
             <div className="flex items-center justify-between mt-4">
               <button
                 type="submit"
-                className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded flex items-center"
+                className="bg-purple-500 hover:bg-purple-700 text-black dark:text-white font-bold py-2 px-4 rounded flex items-center"
               >
                 <FiSend className="mr-2" />
                 Send Message
@@ -93,10 +93,10 @@ const Contact: React.FC = () => {
           </form>
         </div>
         <div className="flex justify-center gap-4 mt-8">
-          <FaFacebookF className="text-2xl cursor-pointer text-white" />
-          <FaTwitter className="text-2xl cursor-pointer text-white" />
-          <FaLinkedinIn className="text-2xl cursor-pointer text-white" />
-          <FaInstagram className="text-2xl cursor-pointer text-white" />
+          <FaFacebookF className="text-2xl cursor-pointer text-black dark:text-white" />
+          <FaTwitter className="text-2xl cursor-pointer text-black dark:text-white" />
+          <FaLinkedinIn className="text-2xl cursor-pointer text-black dark:text-white" />
+          <FaInstagram className="text-2xl cursor-pointer text-black dark:text-white" />
         </div>
       </div>
     </div>  
