@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/common/Navbar";
 import ContactComponent from "../components/contact/Contact";
+import StreakEleReverse from "../components/common/StreakEleReverse";
 import "../app/globals.css";
 
 const Contact: React.FC = () => {
@@ -9,6 +10,7 @@ const Contact: React.FC = () => {
     <div>
       <Navbar />
       <ContactComponent />
+      <StreakEleReverse />
     </div>
   );
 };
