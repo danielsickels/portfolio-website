@@ -23,10 +23,10 @@ function AnimatedElement({
   startPosition,
 }: {
   onEnd: () => void;
-  startPosition: { top: number; right: number };
+  startPosition: { bottom: number; right: number };
 }): React.JSX.Element {
   const [position, setPosition] = useState(startPosition);
-  const [opacity, setOpacity] = useState(1);
+  const [opacity, setopacity] = useState(1);
 
   useEffect(() => {
     const duration = Math.random() * 5000 + 5000;
@@ -39,13 +39,13 @@ function AnimatedElement({
       currentFrame++;
 
       if (currentFrame <= frames) {
-        // Calculate the new position based on the center
-        setPosition((prevPosition: { top: number; right: number }) => ({
-          top: prevPosition.top + 1,
+        // Calculate the new position based on the bottom
+        setPosition((prevPosition: { bottom: number; right: number }) => ({
+          bottom: prevPosition.bottom + 1,
           right: prevPosition.right + 1,
         }));
 
-        setOpacity((prevOpacity) => prevOpacity + 7 / frames);
+        setopacity((prevOpacity) => prevOpacity + 7 / frames);
       } else {
         onEnd();
       }
@@ -62,8 +62,8 @@ function AnimatedElement({
       style={{
         ...position,
         opacity: opacity,
-        right: `${position.right - 250}%`, // Adjust to center the expansion
-        top: `${position.top - 50}%`, // Adjust to center the expansion
+        right: `${position.right - 250}%`, // Adjust to bottom the expansion
+        bottom: `${position.bottom - 50}%`, // Adjust to bottom the expansion
       }}
     ></div>
   );
@@ -81,7 +81,7 @@ const StreakEleReverse = ({ maxElements = 15, creationInterval = 100 }) => {
 
       if (emptyIndex !== -1) {
         const startPosition = {
-          top: -150,
+          bottom: -150,
           right: Math.random() * 100,
         };
 
@@ -114,10 +114,10 @@ const StreakEleReverse = ({ maxElements = 15, creationInterval = 100 }) => {
   }, [creationInterval]);
 
   return (
-    <div className="fixed top-0 right-0 w-full h-full z-[-1] overflow-hidden">
+    <div className="fixed bottom-0 right-0 w-full h-full z-[-1] overflow-hidden">
       {elements}
       <div
-        className="absolute top-0 right-0 w-full h-full"
+        className="absolute bottom-0 right-0 w-full h-full"
         style={{
           backgroundColor: `rgba(var(--background-start-rgb), 0.8)`,
           zIndex: 1,

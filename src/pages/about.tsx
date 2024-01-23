@@ -1,5 +1,5 @@
 // src/pages/about.tsx
-// import React from "react";
+import React from "react";
 import Navbar from "../components/common/Navbar";
 import "../app/globals.css";
 import type { NextPage } from "next";
