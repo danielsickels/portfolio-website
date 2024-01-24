@@ -1,5 +1,6 @@
 // src/pages/about.tsx
 import React from "react";
+import Link from "next/link";
 import Navbar from "../components/common/Navbar";
 import "../app/globals.css";
 import type { NextPage } from "next";
@@ -18,6 +19,21 @@ const About: NextPage = () => {
           </h1>
           <TextSection />
           <BigFiveChart data={bigFiveData} options={options} />
+          <div className="space-x-4 flex items-center justify-center py-10 ml-10 pl-5">
+            <Link href="./contact">
+              <div className="space-x-4">
+                <button className="bg-gray-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">
+                  Feel free to contact me!
+                </button>
+              </div>
+            </Link>{" "}
+            <span className="text-white">or</span>
+            <Link href="./projects">
+              <button className="bg-gray-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">
+                Check out my Github Projects!
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

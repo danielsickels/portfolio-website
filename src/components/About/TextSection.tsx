@@ -21,7 +21,7 @@ const TextSection = () => {
         opportunity for learning, problem-solving, and the creation of
         innovative projects.
       </p>
-      <p className="text-2xl mt-8 mb-6">
+      <p className="text-2xl mt-8 mb-6 pb-20">
         My diverse background in food and health science, along with my
         experience in Quality Assurance, has equipped me with a unique
         perspective to problem-solving and strong alert towards details. I am
