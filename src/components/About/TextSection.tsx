@@ -10,7 +10,7 @@ const TextSection = () => {
         Quality Assurance, where I play a pivotal role in ensuring quality
         standards for a prominent food manufacturer. In this role, I've
         cultivated robust skills in problem-solving, analytical thinking,
-        collaboration, and a strong attention to detail.
+        collaboration, and a strong attention to detail..
       </p>
       <p className="text-2xl mt-8 mb-6">
         A significant turning point in my life ignited my interest in software
