@@ -15,6 +15,7 @@ const Projects: NextPage = () => {
     const projectUrls = [
       "https://github.com/danielsickels/portfolio-website",
       "https://github.com/danielsickels/fighter-game",
+      "https://github.com/danielsickels/puzzlegame",
     ];
 
     projectUrls.forEach(async (url) => {
