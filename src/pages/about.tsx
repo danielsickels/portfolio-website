@@ -18,6 +18,11 @@ const About: NextPage = () => {
           </h1>
           <TextSection />
           <BigFiveChart data={bigFiveData} options={options} />
+          <div>
+            <h2 className="font-bold">
+              Feel free to contact me with any questions!
+            </h2>
+          </div>
         </div>
       </div>
     </div>
