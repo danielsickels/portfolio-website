@@ -10,7 +10,7 @@ const TextSection = () => {
         Quality Assurance, where I play a pivotal role in ensuring quality
         standards for a prominent food manufacturer. In this role, I've
         cultivated robust skills in problem-solving, analytical thinking,
-        collaboration, and a strong attention to detail.
+        collaboration, and a strong attention to detail..
       </p>
       <p className="text-2xl mt-8 mb-6">
         A significant turning point in my life ignited my interest in software
@@ -21,7 +21,7 @@ const TextSection = () => {
         opportunity for learning, problem-solving, and the creation of
         innovative projects.
       </p>
-      <p className="text-2xl mt-8 mb-6">
+      <p className="text-2xl mt-8 mb-6 pb-20">
         My diverse background in food and health science, along with my
         experience in Quality Assurance, has equipped me with a unique
         perspective to problem-solving and strong alert towards details. I am
