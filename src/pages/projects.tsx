@@ -16,6 +16,7 @@ const Projects: NextPage = () => {
       "https://github.com/danielsickels/portfolio-website",
       "https://github.com/danielsickels/fighter-game",
       "https://github.com/danielsickels/puzzlegame",
+      "https://github.com/danielsickels/bible-v-avatar-trivia",
     ];
 
     projectUrls.forEach(async (url) => {
