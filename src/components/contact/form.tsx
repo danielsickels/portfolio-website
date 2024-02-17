@@ -1,8 +1,11 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useEffect } from "react";
+import FireworksComponent from "../common/fireworks";
 
 export const ContactForm = () => {
+  const [isSubmitted, setSubmitted] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -22,26 +25,29 @@ export const ContactForm = () => {
           "content-type": "application/json",
         },
       });
+      if (res.status === 200) {
+        setSubmitted(true);
+      }
     } catch (err: any) {
       console.error("Err", err);
     }
   };
 
   const inputStyle = {
-    padding: "10px",
+    padding: "30px",
     marginBottom: "15px",
-    fontSize: "16px",
-    border: "2px solid #3498db",
-    borderRadius: "5px",
+    fontSize: "22px",
+    border: "3px solid #3498db",
+    borderRadius: "15px",
   };
 
   const textareaStyle = {
-    height: "350px",
-    ...inputStyle, // Inherit styles from inputStyle
+    height: "300px",
+    ...inputStyle,
   };
 
   const buttonStyle = {
-    padding: "10px 15px",
+    padding: "15px 15px",
     fontSize: "18px",
     fontWeight: "bold",
     backgroundColor: "#3498db",
@@ -52,16 +58,50 @@ export const ContactForm = () => {
     transition: "background-color 0.3s ease",
   };
 
-  return (
+  const thankyouStyle = {
+    margin: "auto",
+    testAlign: "center",
+  };
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
+  return isSubmitted ? (
+    <div>
+      <FireworksComponent />
+      <h1 className="text-center font-bold" style={{ fontSize: "3em" }}>
+        Thank you for your message!
+      </h1>
+    </div>
+  ) : (
     <form
       onSubmit={onSubmit}
       style={{
+        maxWidth: "600px",
+        margin: "auto",
+        textAlign: "center",
+        minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        maxWidth: "400px",
-        margin: "auto",
+        justifyContent: "center",
       }}
     >
+      <h1
+        style={{
+          fontSize: "5em",
+          marginBottom: "20px",
+          textAlign: "center",
+          top: "100px",
+          width: "100%",
+        }}
+      >
+        Contact!
+      </h1>
       <input
         value={name}
         onChange={(e) => setName(e.target.value)}
@@ -79,7 +119,7 @@ export const ContactForm = () => {
       <textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        style={inputStyle}
+        style={textareaStyle}
       ></textarea>
       <button type="submit" style={buttonStyle}>
         Submit
