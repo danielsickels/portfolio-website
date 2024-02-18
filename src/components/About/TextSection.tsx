@@ -9,16 +9,16 @@ const TextSection = () => {
         of Nutrition and Dietetics, fueled by a passion for understanding the
         deep biological science behind food and health. This path wasn&apos;t
         just about textbooks and looking good; it was about connecting
-        well-being, feeling joyful, and my body's efficiency through what we eat
-        and how we live.
+        well-being, feeling joyful, and my body&apos;s efficiency through what
+        we eat and how we live.
       </p>
       <p className="text-2xl mt-8 mb-6">
-        I started my experiences young in retail, and soon after in the caring
-        environment of long-term care. I learned much about understanding
-        others&apos; needs and cultivated an aura of patience. I was soon led to
-        the crucial role of quality assurance within a leading food
-        manufacturer. Here, I&apos;ve not only ensured the highest standards of
-        products, but also advocate for food safety.
+        I started my experiences young in retail, and soon after I found myself
+        in the caring environment of long-term care. I learned much about
+        understanding others&apos; needs and cultivated an aura of patience. I
+        was soon led to the crucial role of quality assurance within a leading
+        food manufacturer. Here, I&apos;ve not only ensured the highest
+        standards of products, but also advocate for food safety.
       </p>
       <p className="text-2xl mt-8 mb-6">
         My journey through food and health science, enriched by my experiences
