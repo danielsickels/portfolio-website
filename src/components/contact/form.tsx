@@ -13,6 +13,11 @@ export const ContactForm = () => {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
+    if (!name || !email || !message) {
+      alert("Please fill out all fields");
+      return;
+    }
+
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -59,13 +64,8 @@ export const ContactForm = () => {
     transition: "background-color 0.3s ease",
   };
 
-  const thankyouStyle = {
-    margin: "auto",
-    testAlign: "center",
-  };
-
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = "auto";
 
     return () => {
       document.body.style.overflow = "auto";
