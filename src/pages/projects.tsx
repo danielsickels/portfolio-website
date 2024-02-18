@@ -38,7 +38,7 @@ const Projects: NextPage = () => {
       <div className="bg-gradient-to-r mx-auto p-8 text-black">
         <div className="text-center bg-blue-700/50 backdrop-blur-md rounded-xl p-4 mx-8 my-4 shadow-lg hover:scale-105 transition-transform">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 py-10 text-orange-300">
-            My GitHub Projects
+            Explore My Projects on GitHub
           </h1>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center">

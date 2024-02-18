@@ -4,31 +4,39 @@ const TextSection = () => {
   return (
     <div className="container mx-auto px-6">
       <p className="text-2xl mb-6">
-        Hello, my name is Danny Sickels. In my professional journey, I started
-        in an education for food and health science, where I pursued a degree in
-        Nutrition and Dietetics. My career path has been largely dynamic moving
-        around retail, long term care for elderly, and now Quality Assurance,
-        ensuring quality standards for a prominent food manufacturer. In this
-        role, I&apos;ve cultivated robust skills in problem-solving, analytical
-        thinking, collaboration, and a strong attention to detail.
+        Hello there! I&apos;m Danny Sickels, a curious explorer at the
+        intersection of food science and software. My journey began in the realm
+        of Nutrition and Dietetics, fueled by a passion for understanding the
+        deep biological science behind food and health. This path wasn&apos;t
+        just about textbooks and looking good; it was about connecting
+        well-being, feeling joyful, and my body's efficiency through what we eat
+        and how we live.
       </p>
       <p className="text-2xl mt-8 mb-6">
-        A significant turning point in my life ignited my interest in software
-        engineering. I&apos;ve always enjoyed working with computers for
-        multiple reasons; however, I found a new passion. As I&apos;ve embarked
-        on strong pursuit for knowledge, leveraging my existing skills to dive
-        into the intricacies of coding and development. Each day presents a new
-        opportunity for learning, problem-solving, and the creation of
-        innovative projects.
+        I started my experiences young in retail, and soon after in the caring
+        environment of long-term care. I learned much about understanding
+        others&apos; needs and cultivated an aura of patience. I was soon led to
+        the crucial role of quality assurance within a leading food
+        manufacturer. Here, I&apos;ve not only ensured the highest standards of
+        products, but also advocate for food safety.
+      </p>
+      <p className="text-2xl mt-8 mb-6">
+        My journey through food and health science, enriched by my experiences
+        in quality assurance, has armed me with a unique lens to view problems.
+        It taught me the importance of precision, the value of questioning the
+        ordinary, and the infinite opportunities uncovered through meticulous
+        attention to detail.
+      </p>
+      <p className="text-2xl mt-8 mb-6 pb-5">
+        In transitioning to this new chapter, I bring with me the lessons from
+        my past where I converge my diverse experiences to fuel innovation. As a
+        Quality Assurance Technician aspiring to be a Software Engineer, I have
+        become more than just these experiences; I am incessantly curious and
+        adept, embracing each learning opportunity as a problem solver, and a
+        student at heart. I am ready to make my mark in the digital world.
       </p>
       <p className="text-2xl mt-8 mb-6 pb-20">
-        My diverse background in food and health science, along with my
-        experience in Quality Assurance, has equipped me with a unique
-        perspective to problem-solving and strong alert towards details. I am
-        poised to seamlessly integrate my skills from both worlds into this
-        exciting, continuously evolving landscape of software engineering,
-        contributing meaningfully to the creation of impactful and innovative
-        solutions.
+        Please see more about me below.
       </p>
     </div>
   );
