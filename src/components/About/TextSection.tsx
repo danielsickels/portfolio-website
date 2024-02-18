@@ -6,18 +6,18 @@ const TextSection = () => {
       <p className="text-2xl mb-6">
         Hello, my name is Danny Sickels. In my professional journey, I started
         in an education for food and health science, where I pursued a degree in
-        Nutrition and Dietetics. My career path evolved into a dynamic field of
-        Quality Assurance, where I play a pivotal role in ensuring quality
-        standards for a prominent food manufacturer. In this role, I've
-        cultivated robust skills in problem-solving, analytical thinking,
-        collaboration, and a strong attention to detail..
+        Nutrition and Dietetics. My career path has been largely dynamic moving
+        around retail, long term care for elderly, and now Quality Assurance,
+        ensuring quality standards for a prominent food manufacturer. In this
+        role, I&apos;ve cultivated robust skills in problem-solving, analytical
+        thinking, collaboration, and a strong attention to detail.
       </p>
       <p className="text-2xl mt-8 mb-6">
         A significant turning point in my life ignited my interest in software
-        engineering. I've always enjoyed working with computers for multiple
-        reasons; however, I found a new passion. As I've embarked on strong
-        pursuit for knowledge, leveraging my existing skills to dive into the
-        intricacies of coding and development. Each day presents a new
+        engineering. I&apos;ve always enjoyed working with computers for
+        multiple reasons; however, I found a new passion. As I&apos;ve embarked
+        on strong pursuit for knowledge, leveraging my existing skills to dive
+        into the intricacies of coding and development. Each day presents a new
         opportunity for learning, problem-solving, and the creation of
         innovative projects.
       </p>

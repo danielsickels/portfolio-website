@@ -6,9 +6,7 @@ const FireworksComponent: React.FC = () => {
     const container = document.getElementById("fireworks-container");
     if (!container) return;
 
-    const fireworksInstance = new fireworks.Fireworks(container, {
-      /* your options here */
-    });
+    const fireworksInstance = new fireworks.Fireworks(container, {});
     fireworksInstance.start();
 
     return () => {
@@ -28,9 +26,7 @@ const FireworksComponent: React.FC = () => {
         pointerEvents: "none",
         zIndex: 9999,
       }}
-    >
-      {/* You can customize the container styling as needed */}
-    </div>
+    ></div>
   );
 };
 

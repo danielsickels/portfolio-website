@@ -8,10 +8,10 @@ import {
   AiOutlineMail,
   AiOutlineProject,
 } from "react-icons/ai";
-import { HiMenu, HiX } from "react-icons/hi"; // Importing hamburger icons
+import { HiMenu, HiX } from "react-icons/hi";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false); // State to handle menu toggle
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -23,12 +23,10 @@ const Navbar = () => {
         {/* Page Title */}
         <div className="text-lg font-semibold">Danny Sickels</div>
 
-        {/* Hamburger Icon for Mobile */}
         <div className="md:hidden" onClick={toggleMenu}>
           {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
         </div>
 
-        {/* Navigation Elements - Original Position for Desktop */}
         <div className="hidden md:flex gap-4">
           <Link href="/" className="hover:text-gray-300 flex items-center">
             <AiOutlineHome className="mr-1" /> Home
@@ -38,6 +36,7 @@ const Navbar = () => {
           </Link>
           <Link
             href="/contact"
+            prefetch={false}
             className="hover:text-gray-300 flex items-center"
           >
             <AiOutlineMail className="mr-1" /> Contact

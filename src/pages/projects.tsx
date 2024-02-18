@@ -2,30 +2,40 @@
 import React, { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import Navbar from "../components/common/Navbar";
-import ProjectCard, { ProjectProps } from "..//components/projects/ProjectCard";
+import ProjectCard, { ProjectProps } from "../components/projects/ProjectCard";
 import GitHubApiClient from "../components/lib/GithubApiClient";
-
 import "../app/globals.css";
 
 const Projects: NextPage = () => {
   const [projects, setProjects] = useState<ProjectProps[]>([]);
+  const [projectsFetched, setProjectsFetched] = useState(false);
   const gitHubApiClient = new GitHubApiClient();
 
   useEffect(() => {
-    const projectUrls = [
-      "https://github.com/danielsickels/portfolio-website",
-      "https://github.com/danielsickels/fighter-game",
-      "https://github.com/danielsickels/puzzlegame",
-      "https://github.com/danielsickels/bible-v-avatar-trivia",
-    ];
+    const fetchProjects = async () => {
+      const projectUrls = [
+        "https://github.com/danielsickels/portfolio-website",
+        "https://github.com/danielsickels/fighter-game",
+        "https://github.com/danielsickels/puzzlegame",
+        "https://github.com/danielsickels/bible-v-avatar-trivia",
+      ];
 
-    projectUrls.forEach(async (url) => {
-      const projectData = await gitHubApiClient.fetchRepoData(url);
-      if (projectData) {
-        setProjects((prevProjects) => [...prevProjects, projectData]);
-      }
-    });
-  }, []);
+      const fetchedProjects: (ProjectProps | null)[] = await Promise.all(
+        projectUrls.map(async (url) => gitHubApiClient.fetchRepoData(url))
+      );
+
+      setProjects(
+        fetchedProjects.filter(
+          (project): project is ProjectProps => project !== null
+        )
+      );
+      setProjectsFetched(true);
+    };
+
+    if (!projectsFetched) {
+      fetchProjects();
+    }
+  }, [projectsFetched, gitHubApiClient]);
 
   return (
     <div>

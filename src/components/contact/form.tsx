@@ -37,6 +37,7 @@ export const ContactForm = () => {
     padding: "30px",
     marginBottom: "15px",
     fontSize: "22px",
+    color: "#333",
     border: "3px solid #3498db",
     borderRadius: "15px",
   };
