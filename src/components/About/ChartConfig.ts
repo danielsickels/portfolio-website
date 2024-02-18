@@ -32,13 +32,13 @@ export const bigFiveData = {
 export const options = {
   scales: {
     r: {
-      angleLines: { display: false },
+      angleLines: { display: true },
       suggestedMin: 0,
       suggestedMax: 100,
       ticks: { display: false },
       pointLabels: {
-        display: true,
-        font: { size: 18 },
+        display: false,
+        font: { size: 14 },
       },
     },
   },

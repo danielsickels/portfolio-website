@@ -8,8 +8,6 @@ import "../app/globals.css";
 
 const Projects: NextPage = () => {
   const [projects, setProjects] = useState<ProjectProps[]>([]);
-  const [projectsFetched, setProjectsFetched] = useState(false);
-  const gitHubApiClient = new GitHubApiClient();
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -20,22 +18,19 @@ const Projects: NextPage = () => {
         "https://github.com/danielsickels/bible-v-avatar-trivia",
       ];
 
-      const fetchedProjects: (ProjectProps | null)[] = await Promise.all(
-        projectUrls.map(async (url) => gitHubApiClient.fetchRepoData(url))
+      const gitHubApiClient = new GitHubApiClient();
+      const fetchedProjects = await Promise.all(
+        projectUrls.map((url) => gitHubApiClient.fetchRepoData(url))
       );
 
-      setProjects(
-        fetchedProjects.filter(
-          (project): project is ProjectProps => project !== null
-        )
+      const validProjects = fetchedProjects.filter(
+        (project): project is ProjectProps => project !== null
       );
-      setProjectsFetched(true);
+      setProjects(validProjects);
     };
 
-    if (!projectsFetched) {
-      fetchProjects();
-    }
-  }, [projectsFetched, gitHubApiClient]);
+    fetchProjects();
+  }, []);
 
   return (
     <div>
@@ -46,7 +41,7 @@ const Projects: NextPage = () => {
             My GitHub Projects
           </h1>
         </div>
-        <div className="grid grid-cols-2 gap-4 justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center">
           {projects.map((project, index) => (
             <ProjectCard key={index} project={project} />
           ))}

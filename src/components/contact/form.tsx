@@ -1,8 +1,33 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect, FormEvent } from "react";
 import FireworksComponent from "../common/fireworks";
+
+const inputStyle = {
+  padding: "30px",
+  marginBottom: "15px",
+  fontSize: "22px",
+  color: "#333",
+  border: "3px solid #3498db",
+  borderRadius: "15px",
+};
+
+const textareaStyle = {
+  ...inputStyle,
+  height: "300px",
+};
+
+const buttonStyle = {
+  padding: "15px 15px",
+  fontSize: "22px",
+  fontWeight: "bold",
+  backgroundColor: "#3498db",
+  color: "#fff",
+  border: "none",
+  borderRadius: "5px",
+  cursor: "pointer",
+  transition: "background-color 0.3s ease",
+};
 
 export const ContactForm = () => {
   const [isSubmitted, setSubmitted] = useState(false);
@@ -10,67 +35,37 @@ export const ContactForm = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
+  useEffect(() => {
+    const originalStyle = document.body.style.overflow;
+    document.body.style.overflow = "auto";
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, []);
+
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
     if (!name || !email || !message) {
       alert("Please fill out all fields");
       return;
     }
 
     try {
-      const res = await fetch("/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        body: JSON.stringify({
-          name,
-          email,
-          message,
-        }),
-        headers: {
-          "content-type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
       });
-      if (res.status === 200) {
+
+      if (response.status === 200) {
         setSubmitted(true);
+      } else {
+        console.error("Submission failed", response.statusText);
       }
-    } catch (err: any) {
-      console.error("Err", err);
+    } catch (error) {
+      console.error("Error submitting form", error);
     }
   };
-
-  const inputStyle = {
-    padding: "30px",
-    marginBottom: "15px",
-    fontSize: "22px",
-    color: "#333",
-    border: "3px solid #3498db",
-    borderRadius: "15px",
-  };
-
-  const textareaStyle = {
-    height: "300px",
-    ...inputStyle,
-  };
-
-  const buttonStyle = {
-    padding: "15px 15px",
-    fontSize: "18px",
-    fontWeight: "bold",
-    backgroundColor: "#3498db",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-    transition: "background-color 0.3s ease",
-  };
-
-  useEffect(() => {
-    document.body.style.overflow = "auto";
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
 
   return isSubmitted ? (
     <div>
@@ -92,32 +87,23 @@ export const ContactForm = () => {
         justifyContent: "center",
       }}
     >
-      <h1
-        style={{
-          fontSize: "5em",
-          marginBottom: "20px",
-          textAlign: "center",
-          top: "100px",
-          width: "100%",
-        }}
-      >
-        Contact!
-      </h1>
+      <h1 style={{ fontSize: "5em", marginBottom: "20px" }}>Contact!</h1>
       <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
         type="text"
         placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
         style={inputStyle}
       />
       <input
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
         type="email"
         placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         style={inputStyle}
       />
       <textarea
+        placeholder="Message"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         style={textareaStyle}
