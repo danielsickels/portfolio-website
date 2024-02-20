@@ -116,6 +116,7 @@ export const ContactForm = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           style={textareaStyle}
+          maxLength={500}
         ></textarea>
         <button type="submit" style={buttonStyle}>
           Submit

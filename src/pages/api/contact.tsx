@@ -20,10 +20,12 @@ export default async function handler(
     from: "Contact form <contact@mailgun.me.org>",
     to: "lol",
     subject: "New Contact Form!",
-    text: `New form entry from: 
-    ${name}  |  ${email}
-    
-    ${message}
+    text: `
+New form entry from: 
+${name}
+${email}
+---------------------------------------------------  
+${message}
     `,
   };
 
