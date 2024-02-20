@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, FormEvent } from "react";
 import FireworksComponent from "../common/fireworks";
+import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 
 const inputStyle = {
   padding: "30px",
@@ -27,6 +28,13 @@ const buttonStyle = {
   borderRadius: "5px",
   cursor: "pointer",
   transition: "background-color 0.3s ease",
+};
+
+const iconContainerStyle = {
+  display: "flex",
+  justifyContent: "center",
+  gap: "50px",
+  marginTop: "25px",
 };
 
 export const ContactForm = () => {
@@ -75,42 +83,60 @@ export const ContactForm = () => {
       </h1>
     </div>
   ) : (
-    <form
-      onSubmit={onSubmit}
-      style={{
-        maxWidth: "600px",
-        margin: "auto",
-        textAlign: "center",
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-      }}
-    >
-      <h1 style={{ fontSize: "5em", marginBottom: "20px" }}>Contact!</h1>
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        style={inputStyle}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        style={inputStyle}
-      />
-      <textarea
-        placeholder="Message"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        style={textareaStyle}
-      ></textarea>
-      <button type="submit" style={buttonStyle}>
-        Submit
-      </button>
-    </form>
+    <>
+      <form
+        onSubmit={onSubmit}
+        style={{
+          maxWidth: "600px",
+          margin: "auto",
+          textAlign: "center",
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <h1 style={{ fontSize: "5em", marginBottom: "20px" }}>Contact!</h1>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          style={inputStyle}
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={inputStyle}
+        />
+        <textarea
+          placeholder="Message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          style={textareaStyle}
+        ></textarea>
+        <button type="submit" style={buttonStyle}>
+          Submit
+        </button>
+        <div style={iconContainerStyle}>
+          <a
+            href="https://www.linkedin.com/in/danny-sickels-ab6ab578"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaLinkedinIn className="text-2xl cursor-pointer" />
+          </a>
+          <a
+            href="https://github.com/danielsickels"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGithub className="text-2xl cursor-pointer" />
+          </a>
+        </div>
+      </form>
+    </>
   );
 };
