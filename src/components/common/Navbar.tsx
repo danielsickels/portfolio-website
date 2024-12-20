@@ -51,7 +51,7 @@ const Navbar = () => {
             href="https://barapp.dannysickels.com/"
             className="hover:text-gray-300 flex items-center"
           >
-            <AiOutlineProject className="mr-1" /> SmartBarLighting
+            <AiOutlineProject className="mr-1" /> SmartBarApp
           </Link>
         </div>
       </div>
@@ -82,6 +82,12 @@ const Navbar = () => {
           className="hover:text-gray-300 flex items-center p-4"
         >
           <AiOutlineProject className="mr-1" /> Projects
+        </Link>
+        <Link
+            href="https://barapp.dannysickels.com/"
+            className="hover:text-gray-300 flex items-center"
+          >
+            <AiOutlineProject className="mr-1" /> SmartBarApp
         </Link>
       </div>
     </nav>
