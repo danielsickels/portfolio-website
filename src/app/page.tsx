@@ -16,7 +16,7 @@ const Home: NextPage = () => {
           <h1 className="text-6xl font-bold text-black dark:text-white ">
             Danny Sickels
           </h1>
-          <h2 className="mt-4 text-2xl font-bold italic tracking-wide text-black bg-gradient-to-r from-gray-800 via-blue-400 to-gray-800 p-2 rounded-full shadow-md">
+          <h2 className="mt-4 text-2xl font-bold italic tracking-wide text-black bg-gradient-to-r from-gray-700 via-blue-400 to-gray-700 p-2 rounded-full shadow-md">
             Blending the Science of Food, Quality, and Code into Innovation
           </h2>
           <p className="mt-4 text-2xl text-black dark:text-white"></p>

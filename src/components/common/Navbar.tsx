@@ -47,6 +47,12 @@ const Navbar = () => {
           >
             <AiOutlineProject className="mr-1" /> Projects
           </Link>
+          <Link
+            href="https://barapp.dannysickels.com/"
+            className="hover:text-gray-300 flex items-center"
+          >
+            <AiOutlineProject className="mr-1" /> SmartBarLighting
+          </Link>
         </div>
       </div>
 

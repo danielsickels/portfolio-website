@@ -22,4 +22,4 @@ fi
 echo "Running Docker container..."
 docker run -v $(pwd):/usr/src/app -eWATCHPACK_POLLING=true -dp 3000:3000 --name $CONTAINER_NAME $IMAGE_NAME
 
-echo "Container is running on port 3000"
+echo "Container is running on http://localhost:3000/"

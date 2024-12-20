@@ -8,4 +8,4 @@ If you'd like to run it locally at the root of the repo, execute:
 bash run.sh
 ```
 
-then visit localhost:3000 in browser.
+then visit [localhost:3000](http://localhost:3000/) in browser.
