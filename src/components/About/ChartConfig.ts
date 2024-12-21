@@ -9,22 +9,22 @@ export const bigFiveData = {
   datasets: [
     {
       label: "Score",
-      data: [90, 77, 31, 90, 4],
-      backgroundColor: [
-        "rgba(255, 99, 132, 0.3)",
-        "rgba(54, 162, 235, 0.3)",
-        "rgba(255, 206, 86, 0.3)",
-        "rgba(75, 192, 192, 0.3)",
-        "rgba(153, 102, 255, 0.3)",
-      ],
-      borderColor: [
-        "rgba(255, 99, 132, 1)",
-        "rgba(54, 162, 235, 1)",
-        "rgba(255, 206, 86, 1)",
-        "rgba(75, 192, 192, 1)",
-        "rgba(153, 102, 255, 1)",
-      ],
-      borderWidth: 2,
+    data: [90, 77, 31, 90, 4],
+    backgroundColor: [
+      "rgba(7, 13, 89, 0.3)",   // Dark Blue
+      "rgba(31, 60, 136, 0.3)", // Blue
+      "rgba(238, 95, 87, 0.3)", // Coral Red
+      "rgba(255, 215, 215, 0.3)", // Light Pink
+      "rgba(255, 255, 255, 0.3)", // White
+    ],
+    borderColor: [
+      "rgba(7, 13, 89, 1)",   // Dark Blue
+      "rgba(31, 60, 136, 1)", // Blue
+      "rgba(238, 95, 87, 1)", // Coral Red
+      "rgba(255, 215, 215, 1)", // Light Pink
+      "rgba(255, 255, 255, 1)", // White
+    ],
+    borderWidth: 2,
     },
   ],
 };

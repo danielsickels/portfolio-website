@@ -85,7 +85,7 @@ const Navbar = () => {
         </Link>
         <Link
             href="https://barapp.dannysickels.com/"
-            className="hover:text-gray-300 flex items-center"
+            className="hover:text-gray-300 flex items-center p-4"
           >
             <AiOutlineProject className="mr-1" /> SmartBarApp
         </Link>

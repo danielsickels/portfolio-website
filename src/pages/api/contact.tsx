@@ -4,6 +4,7 @@ import Mailgun from "mailgun.js";
 
 const API_KEY = process.env.MAILGUN_API_KEY || "";
 const DOMAIN = process.env.MAILGUN_DOMAIN || "";
+const TO_EMAIL = process.env.TO_EMAIL || "";
 
 export default async function handler(
   req: NextApiRequest,
@@ -18,7 +19,7 @@ export default async function handler(
 
   const messageData = {
     from: "Contact form <contact@mailgun.me.org>",
-    to: "lol",
+    to: TO_EMAIL,
     subject: "New Contact Form!",
     text: `
 New form entry from: 

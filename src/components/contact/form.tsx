@@ -4,37 +4,54 @@ import React, { useState, useEffect, FormEvent } from "react";
 import FireworksComponent from "../common/fireworks";
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 
-const inputStyle = {
-  padding: "30px",
-  marginBottom: "15px",
-  fontSize: "22px",
-  color: "#333",
-  border: "3px solid #3498db",
+const inputStyle: React.CSSProperties = {
+  padding: "20px",
+  marginBottom: "10px",
+  fontSize: "18px",
+  color: "#070D59",
+  border: "3px solid #1F3C88",
   borderRadius: "15px",
+  width: "100%", 
+  boxSizing: "border-box" as const, 
 };
 
-const textareaStyle = {
+const textareaStyle: React.CSSProperties = {
   ...inputStyle,
   height: "300px",
 };
 
-const buttonStyle = {
+const buttonStyle: React.CSSProperties = {
   padding: "15px 15px",
-  fontSize: "22px",
+  fontSize: "18px",
   fontWeight: "bold",
-  backgroundColor: "#3498db",
-  color: "#fff",
+  backgroundColor: "#EE5F57",
+  color: "#FFFFFF",
   border: "none",
   borderRadius: "5px",
   cursor: "pointer",
   transition: "background-color 0.3s ease",
+  width: "100%", 
+  boxSizing: "border-box" as const, 
 };
 
-const iconContainerStyle = {
+const formStyle: React.CSSProperties = {
+  maxWidth: "600px",
+  margin: "auto",
+  textAlign: "center",
+  minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  padding: "20px",
+  boxSizing: "border-box" as const, 
+};
+
+const iconContainerStyle: React.CSSProperties = {
   display: "flex",
   justifyContent: "center",
   gap: "50px",
   marginTop: "25px",
+  marginBottom: "20px",
 };
 
 export const ContactForm = () => {
@@ -84,18 +101,7 @@ export const ContactForm = () => {
     </div>
   ) : (
     <>
-      <form
-        onSubmit={onSubmit}
-        style={{
-          maxWidth: "600px",
-          margin: "auto",
-          textAlign: "center",
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
+      <form onSubmit={onSubmit} style={formStyle}>
         <h1 style={{ fontSize: "5em", marginBottom: "20px" }}>Contact!</h1>
         <input
           type="text"
