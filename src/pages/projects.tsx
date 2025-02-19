@@ -12,8 +12,9 @@ const Projects: NextPage = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       const projectUrls = [
-        "https://github.com/danielsickels/portfolio-website",
         "https://github.com/danielsickels/SmartBarLighting",
+        "https://github.com/danielsickels/happy-tracker",
+        "https://github.com/danielsickels/portfolio-website",
         "https://github.com/danielsickels/fighter-game",
         "https://github.com/danielsickels/puzzlegame",
         "https://github.com/danielsickels/bible-v-avatar-trivia",
