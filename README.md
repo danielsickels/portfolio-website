@@ -46,13 +46,14 @@ cd portfolio-website
 Install necessary dependencies.  
 
 To run the application locally, execute the following script:
-```bash run.sh```
+```npm run dev```
 After running the script, open your browser and navigate to http://localhost:3000 to view the website.
 
 ---
 
 ### Deployment
 This project includes configurations for containerization and deployment using Docker and Kubernetes.
+You can use the following script, ```bash run.sh``` to build the docker image. Or alternatively, you can use standard commands:  
 ```
 docker build -t portfolio-website .
 docker run -p 3000:3000 portfolio-website
