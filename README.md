@@ -14,12 +14,15 @@ This was truly my first **"Big Project"**, and was a lot of fun putting together
 - **Contact Form:** Allow visitors, _like yourself!_, to get in touch with me directly through the website.  
 ### _Frontend_:
 - **Next.js**
+- **React-based Components**
+- **Typescript**
 - **Tailwind CSS**
 ### _Backend_:
 - **Node.js**
+- **Mailgun Email API**
 ### Containerization / Deployment:
 - **Docker**
-- **Kubernetes**
+- **Kubernetes / (Hosting privately on physical server)**
 
 ---
   
@@ -44,7 +47,7 @@ Install necessary dependencies.
 
 To run the application locally, execute the following script:
 ```bash run.sh```
-After running the script, open your browser and navigate to (http://localhost:3000) to view the website.
+After running the script, open your browser and navigate to http://localhost:3000 to view the website.
 
 ---
 
