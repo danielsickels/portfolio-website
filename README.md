@@ -32,7 +32,7 @@ Ensure you have the following installed on your system:
 
 Node.js  
 Docker  
-Git  
+Kubernetes    
 
 ### Clone the Repository:  
 
