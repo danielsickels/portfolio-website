@@ -30,9 +30,9 @@ To set up and run this project locally, follow the steps below.
 ### Prerequisites
 Ensure you have the following installed on your system:
 
-Node.js 
-Docker
-Git
+Node.js  
+Docker  
+Git  
 
 ### Clone the Repository:  
 
