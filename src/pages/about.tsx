@@ -19,17 +19,17 @@ const About: NextPage = () => {
           </h1>
           <TextSection />
           <BigFiveChart data={bigFiveData} options={options} />
-          <div className="space-x-4 flex items-center justify-center py-10 ml-10 pl-5">
+          <div className="space-x-4 flex items-center justify-center py-5">
             <Link href="./contact">
               <div className="space-x-4">
-                <button className="bg-[#070D59] hover:bg-[#1F3C88] text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105 shadow-md min-w-[250px]">
+                <button className="bg-[#070D59] hover:bg-[#1F3C88] text-white font-bold py-3 px-10 rounded-lg transition-transform transform hover:scale-105 shadow-md">
                   Feel free to contact me!
                 </button>
               </div>
             </Link>
             <span className="text-white mx-4 mb-1 text-lg font-semibold">or</span>
             <Link href="./projects">
-              <button className="bg-[#070D59] hover:bg-[#1F3C88] text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105 shadow-md min-w-[250px]">
+              <button className="bg-[#070D59] hover:bg-[#1F3C88] text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105 shadow-md">
                 Check out my Github Projects!
               </button>
             </Link>
