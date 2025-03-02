@@ -6,7 +6,7 @@
 
 ## Overview  
 
-This was truly my first **"Big Project"**, and was a lot of fun putting together. It helped that I had people for support when developing this, which led to me easily initializing my first Next.js project. 
+This was truly my first __**Big Project**__, and was a lot of fun putting together. It helped that I had people for support when developing this, which led to me easily initializing my first Next.js project. 
 
 ## Features
 - **Responsive Design:** Optimized for various screen sizes, ensuring a seamless experience on desktops, tablets, and mobile devices.  
