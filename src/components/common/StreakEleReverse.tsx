@@ -4,12 +4,12 @@ import { GiConsoleController } from "react-icons/gi";
 const generateRandomClasses = () => {
   const sizes = ["w-6 h-6", "w-12 h-12", "w-16 h-16", "w-24 h-24"];
   const colors = [
-    "bg-red-400",
-    "bg-green-400",
-    "bg-blue-400",
-    "bg-yellow-400",
-    "bg-purple-400",
-    "bg-pink-400",
+    "bg-primary",
+    "bg-primary/80",
+    "bg-primary/60",
+    "bg-accent",
+    "bg-accent/80",
+    "bg-accent/60",
   ];
 
   const size = sizes[Math.floor(Math.random() * sizes.length)];
@@ -26,7 +26,7 @@ function AnimatedElement({
   startPosition: { bottom: number; right: number };
 }): React.JSX.Element {
   const [position, setPosition] = useState(startPosition);
-  const [opacity, setopacity] = useState(1);
+  const [opacity, setopacity] = useState(0);
 
   useEffect(() => {
     const duration = Math.random() * 5000 + 5000;
@@ -45,7 +45,22 @@ function AnimatedElement({
           right: prevPosition.right + 1,
         }));
 
-        setopacity((prevOpacity) => prevOpacity + 7 / frames);
+        // Create fade in and out effect
+        const progress = currentFrame / frames;
+        let newOpacity;
+
+        if (progress < 0.3) {
+          // Fade in during first 30% of journey
+          newOpacity = progress / 0.3;
+        } else if (progress < 0.7) {
+          // Stay at full opacity during middle 40% of journey
+          newOpacity = 1;
+        } else {
+          // Fade out during last 30% of journey
+          newOpacity = (1 - progress) / 0.3;
+        }
+
+        setopacity(Math.max(0, Math.min(1, newOpacity)));
       } else {
         onEnd();
       }

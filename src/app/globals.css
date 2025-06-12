@@ -3,20 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 7, 13, 89; 
-  --background-start-rgb: 255, 215, 215; 
-  --background-end-rgb: 255, 255, 255; 
-  --primary-rgb: 31, 60, 136; 
-  --accent-rgb: 238, 95, 87; 
+  --foreground-rgb: 34, 40, 49; /* #222831 - dark charcoal gray for text */
+  --background-start-rgb: 238, 238, 238; /* #EEEEEE - off white */
+  --background-end-rgb: 238, 238, 238; /* #EEEEEE - off white */
+  --primary-rgb: 0, 173, 181; /* #00ADB5 - cool teal */
+  --accent-rgb: 57, 62, 70; /* #393E46 - medium gray */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255; 
-    --background-start-rgb: 7, 13, 89; 
-    --background-end-rgb: 31, 60, 136; 
-    --primary-rgb: 238, 95, 87; 
-    --accent-rgb: 255, 215, 215; 
+    --foreground-rgb: 238, 238, 238; /* #EEEEEE - off white for text */
+    --background-start-rgb: 34, 40, 49; /* #222831 - dark charcoal gray */
+    --background-end-rgb: 57, 62, 70; /* #393E46 - medium gray for gradient */
+    --primary-rgb: 0, 173, 181; /* #00ADB5 - cool teal */
+    --accent-rgb: 238, 238, 238; /* #EEEEEE - off white as accent */
   }
 }
 

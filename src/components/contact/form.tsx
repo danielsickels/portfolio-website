@@ -8,11 +8,12 @@ const inputStyle: React.CSSProperties = {
   padding: "20px",
   marginBottom: "10px",
   fontSize: "18px",
-  color: "#070D59",
-  border: "3px solid #1F3C88",
+  color: "#222831",
+  backgroundColor: "#EEEEEE",
+  border: "3px solid rgb(var(--primary-rgb))",
   borderRadius: "15px",
-  width: "100%", 
-  boxSizing: "border-box" as const, 
+  width: "100%",
+  boxSizing: "border-box" as const,
 };
 
 const textareaStyle: React.CSSProperties = {
@@ -24,14 +25,14 @@ const buttonStyle: React.CSSProperties = {
   padding: "15px 15px",
   fontSize: "18px",
   fontWeight: "bold",
-  backgroundColor: "#EE5F57",
-  color: "#FFFFFF",
+  backgroundColor: "rgb(var(--primary-rgb))",
+  color: "rgb(var(--accent-rgb))",
   border: "none",
   borderRadius: "5px",
   cursor: "pointer",
   transition: "background-color 0.3s ease",
-  width: "100%", 
-  boxSizing: "border-box" as const, 
+  width: "100%",
+  boxSizing: "border-box" as const,
 };
 
 const formStyle: React.CSSProperties = {
@@ -43,7 +44,7 @@ const formStyle: React.CSSProperties = {
   flexDirection: "column",
   justifyContent: "center",
   padding: "20px",
-  boxSizing: "border-box" as const, 
+  boxSizing: "border-box" as const,
 };
 
 const iconContainerStyle: React.CSSProperties = {
@@ -95,14 +96,22 @@ export const ContactForm = () => {
   return isSubmitted ? (
     <div>
       <FireworksComponent />
-      <h1 className="text-center font-bold" style={{ fontSize: "3em" }}>
+      <h1
+        className="text-center font-bold text-primary"
+        style={{ fontSize: "3em" }}
+      >
         Thank you for your message!
       </h1>
     </div>
   ) : (
     <>
       <form onSubmit={onSubmit} style={formStyle}>
-        <h1 style={{ fontSize: "5em", marginBottom: "20px" }}>Contact!</h1>
+        <h1
+          className="text-primary"
+          style={{ fontSize: "5em", marginBottom: "20px" }}
+        >
+          Contact!
+        </h1>
         <input
           type="text"
           placeholder="Name"
@@ -133,14 +142,14 @@ export const ContactForm = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaLinkedinIn className="text-2xl cursor-pointer" />
+            <FaLinkedinIn className="text-2xl cursor-pointer text-primary hover:text-accent transition-colors" />
           </a>
           <a
             href="https://github.com/danielsickels"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaGithub className="text-2xl cursor-pointer" />
+            <FaGithub className="text-2xl cursor-pointer text-primary hover:text-accent transition-colors" />
           </a>
         </div>
       </form>

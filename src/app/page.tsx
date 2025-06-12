@@ -13,16 +13,16 @@ const Home: NextPage = () => {
       <StreakingElements />
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
-          <h1 className="text-6xl font-bold mb-6 text-[#070D59] dark:text-white">
+          <h1 className="text-6xl font-bold mb-6 text-primary dark:text-accent">
             Danny Sickels
           </h1>
-          <h2 className="mt-4 text-2xl font-bold italic tracking-wide text-white bg-gradient-to-r from-[#1F3C88] via-[#EE5F57] to-[#1F3C88] p-2 rounded-full shadow-md">
+          <h2 className="mt-4 text-2xl font-bold italic tracking-wide text-accent bg-gradient-to-r from-primary via-accent to-primary p-2 rounded-full shadow-md">
             Creative Projects, Full-Stack Development
           </h2>
-          <p className="mt-4 text-2xl text-[#070D59] dark:text-[#FFD7D7]"></p>
+          <p className="mt-4 text-2xl text-primary dark:text-accent"></p>
           <Link
             href="/about"
-            className="mt-8 inline-block bg-[#1F3C88] hover:bg-[#EE5F57] text-white font-bold text-xl py-3 px-6 rounded-full flex items-center justify-center cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
+            className="mt-8 inline-block bg-primary hover:bg-accent text-accent hover:text-primary font-bold text-xl py-3 px-6 rounded-full flex items-center justify-center cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
           >
             Dive In
           </Link>

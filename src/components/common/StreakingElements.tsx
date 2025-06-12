@@ -4,12 +4,12 @@ import { GiConsoleController } from "react-icons/gi";
 const generateRandomClasses = () => {
   const sizes = ["w-6 h-6", "w-12 h-12", "w-16 h-16", "w-24 h-24"];
   const colors = [
-    "bg-red-600",
-    "bg-green-600",
-    "bg-blue-600",
-    "bg-yellow-600",
-    "bg-purple-600",
-    "bg-pink-600",
+    "bg-primary",
+    "bg-primary/80",
+    "bg-primary/60",
+    "bg-accent",
+    "bg-accent/80",
+    "bg-accent/60",
   ];
 
   const size = sizes[Math.floor(Math.random() * sizes.length)];

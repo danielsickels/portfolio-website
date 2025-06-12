@@ -2,7 +2,14 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
-import { ShootingStar, HandWaving, PaperPlaneTilt, Code, Martini, Sunglasses } from "@phosphor-icons/react"
+import {
+  ShootingStar,
+  HandWaving,
+  PaperPlaneTilt,
+  Code,
+  Martini,
+  Sunglasses,
+} from "@phosphor-icons/react";
 import { HiMenu, HiX } from "react-icons/hi";
 
 const Navbar = () => {
@@ -13,11 +20,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-800 text-white p-4 sticky top-0 z-50">
+    <nav className="bg-primary text-accent p-4 sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
         {/* Page Title */}
         <div className="text-lg font-semibold">
-        <Link href="/" className="text-2xl hover:text-gray-300 flex">
+          <Link href="/" className="text-2xl hover:text-accent/70 flex">
             <ShootingStar className="mr-1" /> Danny Sickels
           </Link>
         </div>
@@ -27,34 +34,37 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex gap-4">
-          <Link href="/" className="hover:text-gray-300 flex items-center">
+          <Link href="/" className="hover:text-accent/70 flex items-center">
             <ShootingStar className="mr-1" /> Home
           </Link>
-          <Link href="/about" className="hover:text-gray-300 flex items-center">
+          <Link
+            href="/about"
+            className="hover:text-accent/70 flex items-center"
+          >
             <HandWaving className="mr-1" /> About
           </Link>
           <Link
             href="/contact"
             prefetch={false}
-            className="hover:text-gray-300 flex items-center"
+            className="hover:text-accent/70 flex items-center"
           >
             <PaperPlaneTilt className="mr-1" /> Contact
           </Link>
           <Link
             href="/projects"
-            className="hover:text-gray-300 flex items-center"
+            className="hover:text-accent/70 flex items-center"
           >
             <Code className="mr-1" /> Projects
           </Link>
           <Link
             href="https://barapp.dannysickels.com/"
-            className="hover:text-gray-300 flex items-center"
+            className="hover:text-accent/70 flex items-center"
           >
             <Martini className="mr-1" /> SmartBarApp
           </Link>
           <Link
             href="https://happytracker.dannysickels.com/"
-            className="hover:text-gray-300 flex items-center"
+            className="hover:text-accent/70 flex items-center"
           >
             <Sunglasses className="mr-1" /> HappyTracker
           </Link>
@@ -63,42 +73,42 @@ const Navbar = () => {
 
       {/* Sliding Menu for Mobile */}
       <div
-        className={`absolute top-full left-0 w-full bg-gray-800 md:hidden transition-all ease-in-out duration-300 ${
+        className={`absolute top-full left-0 w-full bg-primary md:hidden transition-all ease-in-out duration-300 ${
           isOpen ? "block" : "hidden"
         }`}
       >
-        <Link href="/" className="hover:text-gray-300 flex items-center p-4">
+        <Link href="/" className="hover:text-accent/70 flex items-center p-4">
           <ShootingStar className="mr-1" /> Home
         </Link>
         <Link
           href="/about"
-          className="hover:text-gray-300 flex items-center p-4"
+          className="hover:text-accent/70 flex items-center p-4"
         >
           <HandWaving className="mr-1" /> About
         </Link>
         <Link
           href="/contact"
-          className="hover:text-gray-300 flex items-center p-4"
+          className="hover:text-accent/70 flex items-center p-4"
         >
           <PaperPlaneTilt className="mr-1" /> Contact
         </Link>
         <Link
           href="/projects"
-          className="hover:text-gray-300 flex items-center p-4"
+          className="hover:text-accent/70 flex items-center p-4"
         >
           <Code className="mr-1" /> Projects
         </Link>
         <Link
-            href="https://barapp.dannysickels.com/"
-            className="hover:text-gray-300 flex items-center p-4"
-          >
-            <Martini className="mr-1" /> SmartBarApp
+          href="https://barapp.dannysickels.com/"
+          className="hover:text-accent/70 flex items-center p-4"
+        >
+          <Martini className="mr-1" /> SmartBarApp
         </Link>
         <Link
-            href="https://happytracker.dannysickels.com/"
-            className="hover:text-gray-300 flex items-center p-4"
-          >
-            <Sunglasses className="mr-1" /> HappyTracker
+          href="https://happytracker.dannysickels.com/"
+          className="hover:text-accent/70 flex items-center p-4"
+        >
+          <Sunglasses className="mr-1" /> HappyTracker
         </Link>
       </div>
     </nav>
