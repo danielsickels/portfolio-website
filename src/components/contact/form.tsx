@@ -14,6 +14,8 @@ const inputStyle: React.CSSProperties = {
   borderRadius: "15px",
   width: "100%",
   boxSizing: "border-box" as const,
+  transition: "all 0.3s ease",
+  boxShadow: "none",
 };
 
 const textareaStyle: React.CSSProperties = {
@@ -30,9 +32,15 @@ const buttonStyle: React.CSSProperties = {
   border: "none",
   borderRadius: "5px",
   cursor: "pointer",
-  transition: "background-color 0.3s ease",
+  transition: "all 0.3s ease",
   width: "100%",
   boxSizing: "border-box" as const,
+  boxShadow: "none",
+};
+
+const hoverStyle: React.CSSProperties = {
+  boxShadow: "0 0 15px rgba(var(--primary-rgb), 0.5)",
+  transform: "scale(1.02)",
 };
 
 const formStyle: React.CSSProperties = {
@@ -118,6 +126,8 @@ export const ContactForm = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           style={inputStyle}
+          onMouseEnter={(e) => Object.assign(e.currentTarget.style, hoverStyle)}
+          onMouseLeave={(e) => Object.assign(e.currentTarget.style, inputStyle)}
         />
         <input
           type="email"
@@ -125,6 +135,8 @@ export const ContactForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           style={inputStyle}
+          onMouseEnter={(e) => Object.assign(e.currentTarget.style, hoverStyle)}
+          onMouseLeave={(e) => Object.assign(e.currentTarget.style, inputStyle)}
         />
         <textarea
           placeholder="Message"
@@ -132,8 +144,19 @@ export const ContactForm = () => {
           onChange={(e) => setMessage(e.target.value)}
           style={textareaStyle}
           maxLength={500}
+          onMouseEnter={(e) => Object.assign(e.currentTarget.style, hoverStyle)}
+          onMouseLeave={(e) =>
+            Object.assign(e.currentTarget.style, textareaStyle)
+          }
         ></textarea>
-        <button type="submit" style={buttonStyle}>
+        <button
+          type="submit"
+          style={buttonStyle}
+          onMouseEnter={(e) => Object.assign(e.currentTarget.style, hoverStyle)}
+          onMouseLeave={(e) =>
+            Object.assign(e.currentTarget.style, buttonStyle)
+          }
+        >
           Submit
         </button>
         <div style={iconContainerStyle}>
@@ -141,6 +164,7 @@ export const ContactForm = () => {
             href="https://www.linkedin.com/in/danny-sickels-ab6ab578"
             target="_blank"
             rel="noopener noreferrer"
+            className="transform transition-all duration-300 hover:scale-110"
           >
             <FaLinkedinIn className="text-2xl cursor-pointer text-primary hover:text-accent transition-colors" />
           </a>
@@ -148,6 +172,7 @@ export const ContactForm = () => {
             href="https://github.com/danielsickels"
             target="_blank"
             rel="noopener noreferrer"
+            className="transform transition-all duration-300 hover:scale-110"
           >
             <FaGithub className="text-2xl cursor-pointer text-primary hover:text-accent transition-colors" />
           </a>
