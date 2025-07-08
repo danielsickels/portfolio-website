@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { GiConsoleController } from "react-icons/gi";
+import React, { useCallback, useEffect, useState } from "react";
 
 const generateRandomClasses = () => {
   const sizes = ["w-6 h-6", "w-12 h-12", "w-16 h-16", "w-24 h-24"];
@@ -74,7 +73,15 @@ const StreakingElements = ({ maxElements = 15, creationInterval = 100 }) => {
     Array(maxElements).fill(null)
   );
 
-  const addElement = () => {
+  const removeElement = useCallback((index: number) => {
+    setElements((prevElements) => {
+      const newElements = [...prevElements];
+      newElements[index] = null;
+      return newElements;
+    });
+  }, []);
+
+  const addElement = useCallback(() => {
     setElements((prevElements) => {
       const newElements = [...prevElements];
       const emptyIndex = newElements.indexOf(null);
@@ -96,22 +103,14 @@ const StreakingElements = ({ maxElements = 15, creationInterval = 100 }) => {
 
       return newElements;
     });
-  };
-
-  const removeElement = (index: number) => {
-    setElements((prevElements) => {
-      const newElements = [...prevElements];
-      newElements[index] = null;
-      return newElements;
-    });
-  };
+  }, [removeElement]);
 
   useEffect(() => {
     addElement();
     const interval = setInterval(addElement, creationInterval);
 
     return () => clearInterval(interval);
-  }, [creationInterval]);
+  }, [addElement, creationInterval]);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-[-1] overflow-hidden">
