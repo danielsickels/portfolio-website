@@ -12,7 +12,7 @@ const About: NextPage = () => {
   return (
     <div>
       <Navbar />
-      <div className="bg-gradient-to-r from-primary to-accent mx-auto p-8 text-accent">
+      <div className="mx-auto p-8">
         <div className="text-center">
           <h1 className="text-5xl font-extrabold text-center mb-4 py-10">
             About Me - Danny Sickels
@@ -27,7 +27,7 @@ const About: NextPage = () => {
                 </button>
               </div>
             </Link>
-            <span className="text-accent mx-4 mb-1 text-lg font-semibold">
+            <span className="mx-4 mb-1 text-lg font-semibold opacity-90">
               or
             </span>
             <Link href="./projects">

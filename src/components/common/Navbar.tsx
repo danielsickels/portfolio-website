@@ -1,117 +1,100 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
-import {
-  ShootingStar,
-  HandWaving,
-  PaperPlaneTilt,
-  Code,
-  Martini,
-  Sunglasses,
-} from "@phosphor-icons/react";
-import { HiMenu, HiX } from "react-icons/hi";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+import { CaretUp } from "@phosphor-icons/react";
+import GooeyNav, { type GooeyNavItem } from "../GooeyNav";
+
+const NAV_ITEMS: GooeyNavItem[] = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+  { label: "Projects", href: "/projects" },
+  { label: "SmartBarApp", href: "https://barapp.dannysickels.com/", external: true },
+  { label: "HappyTracker", href: "https://happytracker.dannysickels.com/", external: true },
+];
+
+const SCROLL_THRESHOLD = 120;
+const FADE_THRESHOLD = 60;
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const [scrollY, setScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
+  const [lastScrollY, setLastScrollY] = useState(0);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
+  const activeIndex = NAV_ITEMS.findIndex((item) => {
+    if (item.external) return false;
+    if (item.href === "/") return pathname === "/";
+    return pathname?.startsWith(item.href) ?? false;
+  });
+
+  const handleScroll = useCallback(() => {
+    const y = typeof window !== "undefined" ? window.scrollY : 0;
+    setScrollDirection(y > lastScrollY ? "down" : "up");
+    setLastScrollY(y);
+    setScrollY(y);
+  }, [lastScrollY]);
+
+  useEffect(() => {
+    setScrollY(typeof window !== "undefined" ? window.scrollY : 0);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const isCollapsed = scrollY > SCROLL_THRESHOLD;
+  const isFaded = scrollY > FADE_THRESHOLD && scrollDirection === "down";
+  const navOpacity = isFaded && !isCollapsed ? Math.max(0, 1 - (scrollY - FADE_THRESHOLD) / 40) : 1;
+  const navTranslate = isFaded && !isCollapsed ? Math.min(-20, -(scrollY - FADE_THRESHOLD) / 2) : 0;
+
   return (
-    <nav className="bg-primary text-accent p-4 sticky top-0 z-50">
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Page Title */}
-        <div className="text-lg font-semibold">
-          <Link href="/" className="text-2xl hover:text-accent/70 flex">
-            <ShootingStar className="mr-1" /> Danny Sickels
+    <>
+      <header
+        className="fixed top-0 left-0 right-0 p-4 z-50 bg-transparent pointer-events-none"
+        aria-hidden={isCollapsed}
+      >
+        <div
+          className="container mx-auto flex flex-col md:flex-row md:justify-between md:items-center gap-4 pointer-events-auto transition-all duration-300 ease-out"
+          style={{
+            opacity: isCollapsed ? 0 : navOpacity,
+            transform: isCollapsed ? "translateY(-100%) scale(0.9)" : `translateY(${navTranslate}px)`,
+          }}
+        >
+          <Link
+            href="/"
+            className="text-primary hover:opacity-90 text-xl font-semibold transition-opacity text-center md:text-left shrink-0"
+          >
+            Danny Sickels
           </Link>
+          <div className="gooey-nav-wrapper overflow-x-auto md:overflow-visible min-w-0">
+            <GooeyNav
+              items={NAV_ITEMS}
+              initialActiveIndex={activeIndex >= 0 ? activeIndex : 0}
+            />
+          </div>
         </div>
+      </header>
 
-        <div className="md:hidden" onClick={toggleMenu}>
-          {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
-        </div>
-
-        <div className="hidden md:flex gap-4">
-          <Link href="/" className="hover:text-accent/70 flex items-center">
-            <ShootingStar className="mr-1" /> Home
-          </Link>
-          <Link
-            href="/about"
-            className="hover:text-accent/70 flex items-center"
-          >
-            <HandWaving className="mr-1" /> About
-          </Link>
-          <Link
-            href="/contact"
-            prefetch={false}
-            className="hover:text-accent/70 flex items-center"
-          >
-            <PaperPlaneTilt className="mr-1" /> Contact
-          </Link>
-          <Link
-            href="/projects"
-            className="hover:text-accent/70 flex items-center"
-          >
-            <Code className="mr-1" /> Projects
-          </Link>
-          <Link
-            href="https://barapp.dannysickels.com/"
-            className="hover:text-accent/70 flex items-center"
-          >
-            <Martini className="mr-1" /> SmartBarApp
-          </Link>
-          <Link
-            href="https://happytracker.dannysickels.com/"
-            className="hover:text-accent/70 flex items-center"
-          >
-            <Sunglasses className="mr-1" /> HappyTracker
-          </Link>
-        </div>
-      </div>
-
-      {/* Sliding Menu for Mobile */}
-      <div
-        className={`absolute top-full left-0 w-full bg-primary md:hidden transition-all ease-in-out duration-300 ${
-          isOpen ? "block" : "hidden"
+      <button
+        onClick={scrollToTop}
+        aria-label="Back to top"
+        className={`fixed top-4 right-4 z-50 w-12 h-12 rounded-full bg-primary/90 hover:bg-primary text-[rgb(34,40,49)] flex items-center justify-center shadow-lg transition-all duration-300 ease-out hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[rgb(34,40,49)] ${
+          isCollapsed
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
-        <Link href="/" className="hover:text-accent/70 flex items-center p-4">
-          <ShootingStar className="mr-1" /> Home
-        </Link>
-        <Link
-          href="/about"
-          className="hover:text-accent/70 flex items-center p-4"
-        >
-          <HandWaving className="mr-1" /> About
-        </Link>
-        <Link
-          href="/contact"
-          className="hover:text-accent/70 flex items-center p-4"
-        >
-          <PaperPlaneTilt className="mr-1" /> Contact
-        </Link>
-        <Link
-          href="/projects"
-          className="hover:text-accent/70 flex items-center p-4"
-        >
-          <Code className="mr-1" /> Projects
-        </Link>
-        <Link
-          href="https://barapp.dannysickels.com/"
-          className="hover:text-accent/70 flex items-center p-4"
-        >
-          <Martini className="mr-1" /> SmartBarApp
-        </Link>
-        <Link
-          href="https://happytracker.dannysickels.com/"
-          className="hover:text-accent/70 flex items-center p-4"
-        >
-          <Sunglasses className="mr-1" /> HappyTracker
-        </Link>
-      </div>
-    </nav>
+        <CaretUp size={28} weight="bold" />
+      </button>
+
+      {/* Spacer to prevent content from jumping (header was sticky, now fixed) */}
+      <div className="h-[72px] md:h-[56px]" />
+    </>
   );
 };
 

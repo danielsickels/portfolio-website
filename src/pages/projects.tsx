@@ -109,15 +109,15 @@ const Projects: NextPage = () => {
   return (
     <div>
       <Navbar />
-      <div className="bg-gradient-to-r from-accent to-primary mx-auto p-8 text-accent">
+      <div className="mx-auto p-8">
         <Link
           href="https://github.com/danielsickels"
           target="_blank"
           rel="noopener noreferrer"
           className="block"
         >
-          <div className="text-center border-2 border-primary rounded-lg shadow-lg p-4 m-4 bg-primary-rgb hover:bg-[rgb(var(--background-start-rgb))] transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 py-10 text-accent">
+          <div className="text-center border-2 border-primary rounded-lg shadow-lg p-4 m-4 bg-primary/20 hover:bg-primary/30 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 py-10 text-primary">
               Explore My Projects on GitHub
             </h1>
           </div>

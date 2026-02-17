@@ -4,13 +4,11 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import Navbar from "../components/common/Navbar";
-import StreakingElements from "../components/common/StreakingElements";
 
 const Home: NextPage = () => {
   return (
     <div>
       <Navbar />
-      <StreakingElements />
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
           <h1 className="text-6xl font-bold mb-6 text-primary dark:text-accent">
