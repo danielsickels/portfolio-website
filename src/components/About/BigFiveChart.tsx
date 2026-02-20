@@ -33,8 +33,8 @@ interface BigFiveChartProps {
 
 const BigFiveChart: React.FC<BigFiveChartProps> = ({ data, options }) => {
   return (
-    <div className="flex flex-col items-center justify-center py-10">
-      <h2 className="text-4xl font-bold py-10">My Personality Traits</h2>
+    <div className="flex flex-col items-center justify-center py-6 sm:py-8 md:py-10">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold py-6 sm:py-8 md:py-10">My Personality Traits</h2>
       <div className="chart-container">
         <PolarArea data={data} options={options} />
       </div>

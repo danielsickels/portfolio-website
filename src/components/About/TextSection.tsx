@@ -3,8 +3,8 @@ import { PuzzlePiece, Anchor, TestTube, Brain } from "@phosphor-icons/react";
 
 const TextSection = () => {
   return (
-    <div className="container mx-auto px-6">
-      <p className="text-2xl mb-6">
+    <div className="mx-auto px-2 sm:px-4">
+      <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-4 sm:mb-6">
         Hi, I&apos;m Danny Sickels—a full-stack developer who brings a
         scientific rigor to every line of code. My career began in Nutrition &
         Dietetics, where I learned to study complex systems, collect clean data,
@@ -12,15 +12,14 @@ const TextSection = () => {
         food manufacturer, I&apos;ve honed an eye for detail, documented every
         variable, and keep production running.
       </p>
-      <p className="text-2xl mt-8 mb-6">
+      <p className="text-base sm:text-lg md:text-xl lg:text-2xl mt-6 sm:mt-8 mb-4 sm:mb-6">
         That same methodical mindset now powers my work with software:
       </p>
-      <ul className="text-2xl space-y-4 mb-6">
-        <li className="flex items-start gap-3">
+      <ul className="text-base sm:text-lg md:text-xl lg:text-2xl space-y-3 sm:space-y-4 mb-4 sm:mb-6">
+        <li className="flex items-start gap-2 sm:gap-3">
           <PuzzlePiece
-            size={32}
+            className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 flex-shrink-0 mt-1 text-primary"
             weight="fill"
-            className="text-primary mt-1 flex-shrink-0"
           />
           <div className="text-left">
             <span className="font-semibold">Full-Stack Developer:</span>{" "}
@@ -28,11 +27,10 @@ const TextSection = () => {
             FastAPI, supported by SQL and real-time databases.
           </div>
         </li>
-        <li className="flex items-start gap-3">
+        <li className="flex items-start gap-2 sm:gap-3">
           <Anchor
-            size={32}
+            className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 flex-shrink-0 mt-1 text-primary"
             weight="fill"
-            className="text-primary mt-1 flex-shrink-0"
           />
           <div className="text-left">
             <span className="font-semibold">DevOps Enthusiast:</span>{" "}
@@ -40,11 +38,10 @@ const TextSection = () => {
             releases, and kept services resilient.
           </div>
         </li>
-        <li className="flex items-start gap-3">
+        <li className="flex items-start gap-2 sm:gap-3">
           <TestTube
-            size={32}
+            className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 flex-shrink-0 mt-1 text-primary"
             weight="fill"
-            className="text-primary mt-1 flex-shrink-0"
           />
           <div className="text-left">
             <span className="font-semibold">Quality Champion:</span> I&apos;ve
@@ -52,11 +49,10 @@ const TextSection = () => {
             experiments—observe, measure, iterate.
           </div>
         </li>
-        <li className="flex items-start gap-3">
+        <li className="flex items-start gap-2 sm:gap-3">
           <Brain
-            size={32}
+            className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 flex-shrink-0 mt-1 text-primary"
             weight="fill"
-            className="text-primary mt-1 flex-shrink-0"
           />
           <div className="text-left">
             <span className="font-semibold">Systems Thinker:</span> Worked with
@@ -65,7 +61,7 @@ const TextSection = () => {
           </div>
         </li>
       </ul>
-      <p className="text-2xl mt-8 mb-6 pb-5">
+      <p className="text-base sm:text-lg md:text-xl lg:text-2xl mt-6 sm:mt-8 mb-4 sm:mb-6 pb-4 sm:pb-5">
         I enjoy tackling difficult puzzles, collaborating across disciplines,
         and learning anything that helps me to move forward and grow. From
         building a game in Unity game engine to launching full-stack cocktail
@@ -73,7 +69,7 @@ const TextSection = () => {
         reliable engineering. I&apos;m always looking for new challenges and
         opportunities to learn and grow.
       </p>
-      <p className="text-2xl mt-8 mb-6 pb-20">
+      <p className="text-base sm:text-lg md:text-xl lg:text-2xl mt-6 sm:mt-8 mb-4 sm:mb-6 pb-12 sm:pb-16 md:pb-20">
         If you&apos;re looking for a developer who pairs scientific curiosity
         with production-ready code, let&apos;s connect. Check out my projects or
         send me a message!

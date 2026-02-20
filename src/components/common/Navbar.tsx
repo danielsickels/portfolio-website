@@ -60,11 +60,11 @@ const Navbar = () => {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 p-4 z-50 bg-transparent pointer-events-none"
+        className="fixed top-0 left-0 right-0 p-3 sm:p-4 z-50 bg-transparent pointer-events-none"
         aria-hidden={isCollapsed}
       >
         <div
-          className="container mx-auto flex flex-col md:flex-row md:justify-between md:items-center gap-4 pointer-events-auto transition-all duration-300 ease-out"
+          className="w-full max-w-7xl mx-auto px-2 sm:px-4 flex flex-col md:flex-row md:justify-between md:items-center gap-2 sm:gap-4 pointer-events-auto transition-all duration-300 ease-out"
           style={{
             opacity: isCollapsed ? 0 : navOpacity,
             transform: isCollapsed ? "translateY(-100%) scale(0.9)" : `translateY(${navTranslate}px)`,
@@ -72,16 +72,16 @@ const Navbar = () => {
         >
           <Link
             href="/"
-            className="text-primary hover:opacity-90 text-xl font-semibold transition-opacity text-center md:text-left shrink-0"
+            className="text-primary hover:opacity-90 text-base sm:text-lg md:text-xl font-semibold transition-opacity text-center md:text-left shrink-0"
           >
             Danny Sickels
           </Link>
           <nav className="overflow-x-auto md:overflow-visible min-w-0">
-            <ul className="flex gap-4 md:gap-8 flex-wrap justify-center md:justify-end list-none p-0 m-0 text-primary">
+            <ul className="flex gap-2 sm:gap-4 md:gap-6 lg:gap-8 flex-wrap justify-center md:justify-end list-none p-0 m-0 text-primary text-sm sm:text-base">
               {NAV_ITEMS.map((item, index) => {
                 const isActive = activeIndex === index;
                 const linkClass =
-                  "inline-block px-4 py-2 rounded-full transition-colors duration-200 " +
+                  "inline-block px-2.5 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 rounded-full transition-colors duration-200 " +
                   (isActive
                     ? "bg-primary text-[rgb(26,30,36)] font-medium"
                     : "text-primary hover:opacity-90 hover:bg-primary/20");
@@ -112,17 +112,17 @@ const Navbar = () => {
       <button
         onClick={scrollToTop}
         aria-label="Back to top"
-        className={`fixed top-4 right-4 z-50 w-12 h-12 rounded-full bg-primary/90 hover:bg-primary text-[rgb(26,30,36)] flex items-center justify-center shadow-lg transition-all duration-300 ease-out hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[rgb(26,30,36)] ${
+        className={`fixed top-3 right-3 sm:top-4 sm:right-4 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/90 hover:bg-primary text-[rgb(26,30,36)] flex items-center justify-center shadow-lg transition-all duration-300 ease-out hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[rgb(26,30,36)] ${
           isCollapsed
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
-        <CaretUp size={28} weight="bold" />
+        <CaretUp className="w-5 h-5 sm:w-7 sm:h-7" weight="bold" />
       </button>
 
       {/* Spacer to prevent content from jumping (header was sticky, now fixed) */}
-      <div className="h-[72px] md:h-[56px]" />
+      <div className="h-14 sm:h-16 md:h-[56px]" />
     </>
   );
 };

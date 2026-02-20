@@ -109,20 +109,20 @@ const Projects: NextPage = () => {
   return (
     <div>
       <Navbar />
-      <div className="mx-auto p-8">
+      <div className="w-full px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10 lg:w-3/5 lg:max-w-5xl lg:mx-auto lg:px-10 lg:py-12">
         <Link
           href="https://github.com/danielsickels"
           target="_blank"
           rel="noopener noreferrer"
           className="block"
         >
-          <div className="text-center border-2 border-primary rounded-lg shadow-lg p-4 m-4 bg-primary/20 hover:bg-primary/30 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 py-10 text-primary">
+          <div className="text-center border-2 border-primary rounded-lg shadow-lg p-4 m-2 sm:m-4 bg-primary/20 hover:bg-primary/30 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 py-6 sm:py-8 md:py-10 text-primary">
               Explore My Projects on GitHub
             </h1>
           </div>
         </Link>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 justify-center mt-4">
           {projects.map((project, index) => (
             <ProjectCard key={index} project={project} />
           ))}

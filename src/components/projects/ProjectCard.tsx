@@ -14,7 +14,7 @@ export interface ProjectProps {
 const ProjectCard: React.FC<{ project: ProjectProps }> = ({ project }) => {
   const { name, description, languages, url, liveUrl } = project;
   return (
-    <div className="flex flex-col h-full border-2 border-primary rounded-lg shadow-lg p-4 m-4 bg-primary-rgb hover:bg-[rgb(var(--background-start-rgb))] transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+    <div className="flex flex-col h-full border-2 border-primary rounded-lg shadow-lg p-3 sm:p-4 m-2 sm:m-4 bg-primary/10 hover:bg-primary/20 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">
       <div className="flex-grow">
         <h3 className="text-2xl font-bold text-primary mt-2">{name}</h3>
         <p className="text-primary italic break-words">{description}</p>

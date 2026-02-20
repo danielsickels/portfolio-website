@@ -2,8 +2,9 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  max-width: 750px;
+  max-width: min(750px, 95vw);
   margin: auto;
+  padding: 0 0.5rem;
 }
 
 .chartLegend {
