@@ -47,7 +47,7 @@ const formStyle: React.CSSProperties = {
   maxWidth: "600px",
   margin: "auto",
   textAlign: "center",
-  minHeight: "100vh",
+  minHeight: "calc(100dvh - 5rem)",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",

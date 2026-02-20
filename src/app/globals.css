@@ -20,13 +20,17 @@
   }
 }
 
-body {
-  color: rgb(238, 238, 238); /* light text on dark background */
-  background: rgb(34, 40, 49); /* #222831 - very dark silver gray */
+html {
+  background: rgb(26, 30, 36);
+  overflow-x: hidden;
 }
 
-html {
-  background: rgb(34, 40, 49);
+body {
+  color: rgb(238, 238, 238); /* light text on dark background */
+  background: rgb(26, 30, 36); /* #1a1e24 - darker gray */
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
 }
 
 .text-primary {

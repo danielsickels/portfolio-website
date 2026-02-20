@@ -83,7 +83,7 @@ const Navbar = () => {
                 const linkClass =
                   "inline-block px-4 py-2 rounded-full transition-colors duration-200 " +
                   (isActive
-                    ? "bg-primary text-[rgb(34,40,49)] font-medium"
+                    ? "bg-primary text-[rgb(26,30,36)] font-medium"
                     : "text-primary hover:opacity-90 hover:bg-primary/20");
                 return (
                   <li key={item.label}>
@@ -112,7 +112,7 @@ const Navbar = () => {
       <button
         onClick={scrollToTop}
         aria-label="Back to top"
-        className={`fixed top-4 right-4 z-50 w-12 h-12 rounded-full bg-primary/90 hover:bg-primary text-[rgb(34,40,49)] flex items-center justify-center shadow-lg transition-all duration-300 ease-out hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[rgb(34,40,49)] ${
+        className={`fixed top-4 right-4 z-50 w-12 h-12 rounded-full bg-primary/90 hover:bg-primary text-[rgb(26,30,36)] flex items-center justify-center shadow-lg transition-all duration-300 ease-out hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[rgb(26,30,36)] ${
           isCollapsed
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 -translate-y-4 pointer-events-none"

@@ -7,6 +7,8 @@ import type { NextPage } from "next";
 import TextSection from "../components/About/TextSection";
 import BigFiveChart from "../components/About/BigFiveChart";
 import { bigFiveData, options } from "../components/About/ChartConfig";
+import { LogoLoop } from "../components/LogoLoop";
+import { TECH_LOGOS } from "../components/TechLogos";
 
 const About: NextPage = () => {
   return (
@@ -18,6 +20,20 @@ const About: NextPage = () => {
             About Me - Danny Sickels
           </h1>
           <TextSection />
+          <div className="w-full max-w-5xl mx-auto my-12 py-8">
+            <LogoLoop
+              logos={TECH_LOGOS}
+              speed={80}
+              direction="left"
+              logoHeight={48}
+              gap={48}
+              pauseOnHover
+              fadeOut
+              fadeOutColor="rgb(26,30,36)"
+              scaleOnHover
+              ariaLabel="Technologies I work with"
+            />
+          </div>
           <BigFiveChart data={bigFiveData} options={options} />
           <div className="space-x-4 flex items-center justify-center py-5">
             <Link href="./contact">
