@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in-up 0.3s ease-out forwards;
+}
+
 :root {
   --foreground-rgb: 34, 40, 49; /* #222831 - dark charcoal gray for text */
   --background-start-rgb: 238, 238, 238; /* #EEEEEE - off white */

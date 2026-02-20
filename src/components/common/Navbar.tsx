@@ -28,6 +28,7 @@ const Navbar = () => {
   const [scrollY, setScrollY] = useState(0);
   const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const activeIndex = NAV_ITEMS.findIndex((item) => {
     if (item.external) return false;
@@ -48,14 +49,56 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const closeMobileMenu = () => setMobileMenuOpen(false);
 
   const isCollapsed = scrollY > SCROLL_THRESHOLD;
   const isFaded = scrollY > FADE_THRESHOLD && scrollDirection === "down";
   const navOpacity = isFaded && !isCollapsed ? Math.max(0, 1 - (scrollY - FADE_THRESHOLD) / 40) : 1;
   const navTranslate = isFaded && !isCollapsed ? Math.min(-20, -(scrollY - FADE_THRESHOLD) / 2) : 0;
+
+  const NavLinks = () => (
+    <>
+      {NAV_ITEMS.map((item, index) => {
+        const isActive = activeIndex === index;
+        const linkClass =
+          "inline-block px-4 py-3 rounded-xl transition-all duration-200 font-medium " +
+          (isActive
+            ? "bg-primary text-[rgb(26,30,36)]"
+            : "text-primary hover:bg-primary/20 hover:translate-x-1");
+        return (
+          <li key={item.label}>
+            {item.external ? (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+                onClick={closeMobileMenu}
+              >
+                {item.label}
+              </a>
+            ) : (
+              <Link href={item.href} className={linkClass} onClick={closeMobileMenu}>
+                {item.label}
+              </Link>
+            )}
+          </li>
+        );
+      })}
+    </>
+  );
 
   return (
     <>
@@ -64,7 +107,7 @@ const Navbar = () => {
         aria-hidden={isCollapsed}
       >
         <div
-          className="w-full max-w-7xl mx-auto px-2 sm:px-4 flex flex-col md:flex-row md:justify-between md:items-center gap-2 sm:gap-4 pointer-events-auto transition-all duration-300 ease-out"
+          className="w-full max-w-7xl mx-auto px-2 sm:px-4 flex flex-row justify-between md:justify-start md:gap-4 items-center pointer-events-auto transition-all duration-300 ease-out"
           style={{
             opacity: isCollapsed ? 0 : navOpacity,
             transform: isCollapsed ? "translateY(-100%) scale(0.9)" : `translateY(${navTranslate}px)`,
@@ -72,32 +115,87 @@ const Navbar = () => {
         >
           <Link
             href="/"
-            className="text-primary hover:opacity-90 text-base sm:text-lg md:text-xl font-semibold transition-opacity text-center md:text-left shrink-0"
+            className="text-primary hover:opacity-90 text-base sm:text-lg md:text-xl font-semibold transition-opacity shrink-0"
           >
             Danny Sickels
           </Link>
-          <nav className="overflow-x-auto md:overflow-visible min-w-0">
-            <ul className="flex gap-2 sm:gap-4 md:gap-6 lg:gap-8 flex-wrap justify-center md:justify-end list-none p-0 m-0 text-primary text-sm sm:text-base">
+
+          {/* Desktop nav - hidden on mobile */}
+          <nav className="hidden md:flex overflow-x-auto md:overflow-visible min-w-0 flex-1 justify-end">
+            <ul className="flex gap-4 lg:gap-8 list-none p-0 m-0 text-primary text-base">
+              <NavLinks />
+            </ul>
+          </nav>
+
+          {/* Mobile hamburger - animated */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden relative w-10 h-10 flex flex-col justify-center items-center rounded-lg text-primary hover:bg-primary/20 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[rgb(26,30,36)]"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+          >
+            <span
+              className={`block w-5 h-0.5 bg-current rounded-full transition-all duration-300 origin-center ${
+                mobileMenuOpen ? "rotate-45 translate-y-0.5" : "translate-y-[-6px]"
+              }`}
+            />
+            <span
+              className={`block w-5 h-0.5 bg-current rounded-full transition-all duration-300 ${
+                mobileMenuOpen ? "opacity-0 scale-0" : "opacity-100 scale-100"
+              }`}
+            />
+            <span
+              className={`block w-5 h-0.5 bg-current rounded-full transition-all duration-300 origin-center ${
+                mobileMenuOpen ? "-rotate-45 -translate-y-0.5" : "translate-y-[6px]"
+              }`}
+            />
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile menu overlay - slide-in from right */}
+      <div
+        className={`fixed inset-0 z-40 md:hidden transition-opacity duration-300 ${
+          mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div
+          className="absolute inset-0 bg-[rgb(26,30,36)]/95 backdrop-blur-xl"
+          onClick={closeMobileMenu}
+          aria-hidden="true"
+        />
+        <div
+          className={`absolute top-0 right-0 h-full w-[min(85vw,320px)] bg-[rgb(26,30,36)] border-l border-primary/30 shadow-2xl transition-transform duration-300 ease-out ${
+            mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <nav className="pt-20 px-4" onClick={(e) => e.stopPropagation()}>
+            <ul className="flex flex-col gap-1 list-none p-0 m-0">
               {NAV_ITEMS.map((item, index) => {
                 const isActive = activeIndex === index;
                 const linkClass =
-                  "inline-block px-2.5 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 rounded-full transition-colors duration-200 " +
+                  "block px-4 py-3 rounded-xl transition-all duration-200 font-medium " +
                   (isActive
-                    ? "bg-primary text-[rgb(26,30,36)] font-medium"
-                    : "text-primary hover:opacity-90 hover:bg-primary/20");
+                    ? "bg-primary text-[rgb(26,30,36)]"
+                    : "text-primary hover:bg-primary/20");
                 return (
-                  <li key={item.label}>
+                  <li
+                    key={item.label}
+                    className="animate-fade-in"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
                     {item.external ? (
                       <a
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={linkClass}
+                        onClick={closeMobileMenu}
                       >
                         {item.label}
                       </a>
                     ) : (
-                      <Link href={item.href} className={linkClass}>
+                      <Link href={item.href} className={linkClass} onClick={closeMobileMenu}>
                         {item.label}
                       </Link>
                     )}
@@ -107,7 +205,7 @@ const Navbar = () => {
             </ul>
           </nav>
         </div>
-      </header>
+      </div>
 
       <button
         onClick={scrollToTop}
@@ -121,7 +219,7 @@ const Navbar = () => {
         <CaretUp className="w-5 h-5 sm:w-7 sm:h-7" weight="bold" />
       </button>
 
-      {/* Spacer to prevent content from jumping (header was sticky, now fixed) */}
+      {/* Spacer */}
       <div className="h-14 sm:h-16 md:h-[56px]" />
     </>
   );
