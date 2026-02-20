@@ -4,9 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { CaretUp } from "@phosphor-icons/react";
-import GooeyNav, { type GooeyNavItem } from "../GooeyNav";
 
-const NAV_ITEMS: GooeyNavItem[] = [
+interface NavItem {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -71,12 +76,36 @@ const Navbar = () => {
           >
             Danny Sickels
           </Link>
-          <div className="gooey-nav-wrapper overflow-x-auto md:overflow-visible min-w-0">
-            <GooeyNav
-              items={NAV_ITEMS}
-              initialActiveIndex={activeIndex >= 0 ? activeIndex : 0}
-            />
-          </div>
+          <nav className="overflow-x-auto md:overflow-visible min-w-0">
+            <ul className="flex gap-4 md:gap-8 flex-wrap justify-center md:justify-end list-none p-0 m-0 text-primary">
+              {NAV_ITEMS.map((item, index) => {
+                const isActive = activeIndex === index;
+                const linkClass =
+                  "inline-block px-4 py-2 rounded-full transition-colors duration-200 " +
+                  (isActive
+                    ? "bg-primary text-[rgb(34,40,49)] font-medium"
+                    : "text-primary hover:opacity-90 hover:bg-primary/20");
+                return (
+                  <li key={item.label}>
+                    {item.external ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={linkClass}
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link href={item.href} className={linkClass}>
+                        {item.label}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
         </div>
       </header>
 
