@@ -210,13 +210,13 @@ const Navbar = () => {
       <button
         onClick={scrollToTop}
         aria-label="Back to top"
-        className={`fixed top-3 right-3 sm:top-4 sm:right-4 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/90 hover:bg-primary text-[rgb(26,30,36)] flex items-center justify-center shadow-lg transition-all duration-300 ease-out hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[rgb(26,30,36)] ${
+        className={`fixed top-3 right-3 sm:top-4 sm:right-4 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[rgb(26,30,36)] hover:bg-[rgb(36,40,48)] flex items-center justify-center shadow-lg transition-all duration-300 ease-out hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[rgb(26,30,36)] ${
           isCollapsed
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
-        <CaretUp className="w-5 h-5 sm:w-7 sm:h-7" weight="bold" />
+        <CaretUp className="w-5 h-5 sm:w-7 sm:h-7 text-primary" weight="fill" />
       </button>
 
       {/* Spacer */}
