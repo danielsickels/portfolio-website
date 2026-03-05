@@ -14,6 +14,7 @@ const Projects: NextPage = () => {
     const fetchProjects = async () => {
       const projectUrls = [
         "https://github.com/danielsickels/SmartBarLighting",
+        "https://github.com/danielsickels/liftz",
         "https://github.com/danielsickels/happy-tracker",
         "https://github.com/danielsickels/portfolio-website",
         "https://github.com/danielsickels/fighter-game",
@@ -24,6 +25,7 @@ const Projects: NextPage = () => {
       // Mapping of GitHub repo names to live demo URLs
       const liveDemoUrls: Record<string, string> = {
         SmartBarLighting: "https://barapp.dannysickels.com/",
+        liftz: "https://brogram.dannysickels.com/",
         "happy-tracker": "https://happytracker.dannysickels.com/",
         "portfolio-website": "https://dannysickels.com/",
       };
@@ -37,6 +39,14 @@ const Projects: NextPage = () => {
           languages: ["JavaScript", "Python", "HTML", "CSS"],
           url: "https://github.com/danielsickels/SmartBarLighting",
           liveUrl: "https://barapp.dannysickels.com/",
+        },
+        {
+          name: "The Brogram",
+          description:
+            "Wordpress theme built in PHP. Allows user to track workout progress. Includes WP posts and shortcode options.",
+          languages: ["JavaScript", "HTML", "PHP", "CSS"],
+          url: "https://github.com/danielsickels/liftz",
+          liveUrl: "https://brogram.dannysickels.com/",
         },
         {
           name: "happy-tracker",

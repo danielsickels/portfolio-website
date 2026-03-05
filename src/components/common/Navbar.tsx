@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
-import { CaretUp } from "@phosphor-icons/react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { CaretUp, CaretDown } from "@phosphor-icons/react";
+import { FaGithub } from "react-icons/fa";
+import GradientText from "../GradientText";
 
 interface NavItem {
   label: string;
@@ -11,17 +13,41 @@ interface NavItem {
   external?: boolean;
 }
 
+interface ProjectDropdownItem {
+  label: string;
+  href: string;
+  external?: boolean;
+  showGithubIcon?: boolean;
+}
+
 const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
-  { label: "Projects", href: "/projects" },
-  { label: "SmartBarApp", href: "https://barapp.dannysickels.com/", external: true },
+];
+
+const MEME_MONSTERS_LINK = {
+  label: "Meme Monsters",
+  href: "https://meme-monsters.shoeboxstudios.io/",
+  external: true as const,
+};
+
+const PROJECT_DROPDOWN_ITEMS: ProjectDropdownItem[] = [
+  { label: "All Projects", href: "/projects" },
+  { label: "SmartBarLighting", href: "https://barapp.dannysickels.com/", external: true },
+  { label: "Brogram", href: "https://brogram.dannysickels.com/", external: true },
   { label: "HappyTracker", href: "https://happytracker.dannysickels.com/", external: true },
+  { label: "Portfolio Website", href: "https://github.com/danielsickels/portfolio-website", external: true, showGithubIcon: true },
+  { label: "Fighter Game", href: "https://github.com/danielsickels/fighter-game", external: true, showGithubIcon: true },
+  { label: "Puzzle Game", href: "https://github.com/danielsickels/puzzlegame", external: true, showGithubIcon: true },
+  { label: "TriviaGame", href: "https://github.com/danielsickels/bible-v-avatar-trivia", external: true, showGithubIcon: true },
 ];
 
 const SCROLL_THRESHOLD = 120;
 const FADE_THRESHOLD = 60;
+
+const DROPDOWN_ITEM_CLASS =
+  "flex items-center justify-between w-full gap-2 px-3 py-2.5 text-sm font-medium rounded-lg text-primary hover:bg-primary/20 transition-colors text-left min-w-[180px]";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -29,7 +55,10 @@ const Navbar = () => {
   const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [projectsDropdownOpen, setProjectsDropdownOpen] = useState(false);
+  const projectsDropdownRef = useRef<HTMLLIElement>(null);
 
+  const isProjectsActive = pathname === "/projects";
   const activeIndex = NAV_ITEMS.findIndex((item) => {
     if (item.external) return false;
     if (item.href === "/") return pathname === "/";
@@ -51,11 +80,25 @@ const Navbar = () => {
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+    if (!mobileMenuOpen) setProjectsDropdownOpen(false);
   }, [mobileMenuOpen]);
 
   useEffect(() => {
     setMobileMenuOpen(false);
+    setProjectsDropdownOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (projectsDropdownRef.current && !projectsDropdownRef.current.contains(event.target as Node)) {
+        setProjectsDropdownOpen(false);
+      }
+    };
+    if (projectsDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [projectsDropdownOpen]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -67,6 +110,119 @@ const Navbar = () => {
   const isFaded = scrollY > FADE_THRESHOLD && scrollDirection === "down";
   const navOpacity = isFaded && !isCollapsed ? Math.max(0, 1 - (scrollY - FADE_THRESHOLD) / 40) : 1;
   const navTranslate = isFaded && !isCollapsed ? Math.min(-20, -(scrollY - FADE_THRESHOLD) / 2) : 0;
+
+  const ProjectsDropdown = ({ isMobile = false }: { isMobile?: boolean }) => {
+    const triggerClass =
+      "inline-flex items-center gap-1 px-4 py-3 rounded-xl transition-all duration-200 font-medium " +
+      (isProjectsActive
+        ? "bg-primary text-[rgb(26,30,36)]"
+        : "text-primary hover:bg-primary/20 hover:translate-x-1");
+
+    const dropdownContent = (
+      <ul className="absolute top-full left-0 mt-1 py-1 bg-[rgb(26,30,36)] border border-primary/30 rounded-lg shadow-xl z-50 min-w-[180px]">
+        {PROJECT_DROPDOWN_ITEMS.map((item) => (
+          <li key={item.label}>
+            {item.external ? (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={DROPDOWN_ITEM_CLASS}
+                onClick={() => {
+                  closeMobileMenu();
+                  setProjectsDropdownOpen(false);
+                }}
+              >
+                <span>{item.label}</span>
+                {item.showGithubIcon ? <FaGithub className="h-4 w-4 shrink-0" /> : <span className="w-4 h-4 shrink-0" />}
+              </a>
+            ) : (
+              <Link
+                href={item.href}
+                className={DROPDOWN_ITEM_CLASS}
+                onClick={() => {
+                  closeMobileMenu();
+                  setProjectsDropdownOpen(false);
+                }}
+              >
+                <span>{item.label}</span>
+                <span className="w-4 h-4 shrink-0" />
+              </Link>
+            )}
+          </li>
+        ))}
+      </ul>
+    );
+
+    if (isMobile) {
+      return (
+        <>
+          <button
+            onClick={() => setProjectsDropdownOpen(!projectsDropdownOpen)}
+            className={`block w-full ${triggerClass} text-left`}
+            aria-expanded={projectsDropdownOpen}
+          >
+            Projects
+            <CaretDown
+              className={`h-4 w-4 shrink-0 transition-transform ${projectsDropdownOpen ? "rotate-180" : ""}`}
+            />
+          </button>
+          {projectsDropdownOpen && (
+            <div className="relative mt-1 pl-2 border-l-2 border-primary/30">
+              {PROJECT_DROPDOWN_ITEMS.map((item) => (
+                <div key={item.label} className="py-0.5">
+                  {item.external ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={DROPDOWN_ITEM_CLASS}
+                      onClick={() => {
+                        closeMobileMenu();
+                        setProjectsDropdownOpen(false);
+                      }}
+                    >
+                      <span>{item.label}</span>
+                      {item.showGithubIcon ? <FaGithub className="h-4 w-4 shrink-0" /> : <span className="w-4 h-4 shrink-0" />}
+                    </a>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className={DROPDOWN_ITEM_CLASS}
+                      onClick={() => {
+                        closeMobileMenu();
+                        setProjectsDropdownOpen(false);
+                      }}
+                    >
+                      <span>{item.label}</span>
+                      <span className="w-4 h-4 shrink-0" />
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      );
+    }
+
+    return (
+      <li ref={projectsDropdownRef} className="relative">
+        <button
+          type="button"
+          onClick={() => setProjectsDropdownOpen(!projectsDropdownOpen)}
+          className={triggerClass}
+          aria-expanded={projectsDropdownOpen}
+        >
+          Projects
+          <CaretDown
+            className={`h-4 w-4 shrink-0 transition-transform ${projectsDropdownOpen ? "rotate-180" : ""}`}
+          />
+        </button>
+        {projectsDropdownOpen && dropdownContent}
+      </li>
+    );
+  };
 
   const NavLinks = () => (
     <>
@@ -97,6 +253,26 @@ const Navbar = () => {
           </li>
         );
       })}
+      <ProjectsDropdown />
+      <li>
+        <a
+          href={MEME_MONSTERS_LINK.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block rounded-xl transition-all duration-200 hover:translate-x-1"
+          onClick={closeMobileMenu}
+        >
+          <GradientText
+            colors={["rgba(0,173,181,0.75)", "rgba(0,229,255,0.55)", "rgba(255,107,157,0.7)", "rgba(57,62,70,0.65)"]}
+            className="font-medium px-4 py-3 rounded-xl bg-[rgb(26,30,36)]/30 backdrop-blur-sm"
+            animationSpeed={8}
+            direction="horizontal"
+            pauseOnHover
+          >
+            {MEME_MONSTERS_LINK.label}
+          </GradientText>
+        </a>
+      </li>
     </>
   );
 
@@ -202,6 +378,31 @@ const Navbar = () => {
                   </li>
                 );
               })}
+              <li className="animate-fade-in" style={{ animationDelay: `${NAV_ITEMS.length * 50}ms` }}>
+                <ProjectsDropdown isMobile />
+              </li>
+              <li
+                className="animate-fade-in"
+                style={{ animationDelay: `${(NAV_ITEMS.length + 1) * 50}ms` }}
+              >
+                <a
+                  href={MEME_MONSTERS_LINK.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block rounded-xl transition-all duration-200"
+                  onClick={closeMobileMenu}
+                >
+                  <GradientText
+                    colors={["rgba(0,173,181,0.75)", "rgba(0,229,255,0.75)", "rgba(255,107,157,0.75)", "rgba(57,62,70,0.75)"]}
+                    className="font-medium px-4 py-3 rounded-xl bg-[rgb(26,30,36)]/30 backdrop-blur-sm block"
+                    animationSpeed={8}
+                    direction="horizontal"
+                    pauseOnHover
+                  >
+                    {MEME_MONSTERS_LINK.label}
+                  </GradientText>
+                </a>
+              </li>
             </ul>
           </nav>
         </div>
