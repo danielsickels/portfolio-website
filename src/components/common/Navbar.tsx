@@ -34,20 +34,20 @@ const MEME_MONSTERS_LINK = {
 
 const PROJECT_DROPDOWN_ITEMS: ProjectDropdownItem[] = [
   { label: "All Projects", href: "/projects" },
-  { label: "SmartBarLighting", href: "https://barapp.dannysickels.com/", external: true },
-  { label: "Brogram", href: "https://brogram.dannysickels.com/", external: true },
-  { label: "HappyTracker", href: "https://happytracker.dannysickels.com/", external: true },
-  { label: "Portfolio Website", href: "https://github.com/danielsickels/portfolio-website", external: true, showGithubIcon: true },
-  { label: "Fighter Game", href: "https://github.com/danielsickels/fighter-game", external: true, showGithubIcon: true },
-  { label: "Puzzle Game", href: "https://github.com/danielsickels/puzzlegame", external: true, showGithubIcon: true },
-  { label: "TriviaGame", href: "https://github.com/danielsickels/bible-v-avatar-trivia", external: true, showGithubIcon: true },
+  { label: "SmartBarLighting", href: "https://barapp.dannysickels.com/", external: true as const },
+  { label: "Brogram", href: "https://brogram.dannysickels.com/", external: true as const },
+  { label: "HappyTracker", href: "https://happytracker.dannysickels.com/", external: true as const },
+  { label: "Portfolio Website", href: "https://github.com/danielsickels/portfolio-website", external: true as const, showGithubIcon: true },
+  { label: "Fighter Game", href: "https://github.com/danielsickels/fighter-game", external: true as const, showGithubIcon: true },
+  { label: "Puzzle Game", href: "https://github.com/danielsickels/puzzlegame", external: true as const, showGithubIcon: true },
+  { label: "TriviaGame", href: "https://github.com/danielsickels/bible-v-avatar-trivia", external: true as const, showGithubIcon: true },
 ];
 
 const SCROLL_THRESHOLD = 120;
 const FADE_THRESHOLD = 60;
 
 const DROPDOWN_ITEM_CLASS =
-  "flex items-center justify-between w-full gap-2 px-3 py-2.5 text-sm font-medium rounded-lg text-primary hover:bg-primary/20 transition-colors text-left min-w-[180px]";
+  "block px-4 py-3 rounded-xl transition-all duration-200 font-medium text-primary hover:bg-primary/20 flex items-center justify-between gap-2 w-full";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -55,8 +55,9 @@ const Navbar = () => {
   const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [projectsDropdownOpen, setProjectsDropdownOpen] = useState(false);
-  const projectsDropdownRef = useRef<HTMLLIElement>(null);
+  const [desktopProjectsDropdownOpen, setDesktopProjectsDropdownOpen] = useState(false);
+  const [mobileProjectsDropdownOpen, setMobileProjectsDropdownOpen] = useState(false);
+  const desktopProjectsDropdownRef = useRef<HTMLLIElement>(null);
 
   const isProjectsActive = pathname === "/projects";
   const activeIndex = NAV_ITEMS.findIndex((item) => {
@@ -80,25 +81,29 @@ const Navbar = () => {
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
-    if (!mobileMenuOpen) setProjectsDropdownOpen(false);
+    if (!mobileMenuOpen) setMobileProjectsDropdownOpen(false);
   }, [mobileMenuOpen]);
 
   useEffect(() => {
     setMobileMenuOpen(false);
-    setProjectsDropdownOpen(false);
+    setDesktopProjectsDropdownOpen(false);
+    setMobileProjectsDropdownOpen(false);
   }, [pathname]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (projectsDropdownRef.current && !projectsDropdownRef.current.contains(event.target as Node)) {
-        setProjectsDropdownOpen(false);
+      if (
+        desktopProjectsDropdownRef.current &&
+        !desktopProjectsDropdownRef.current.contains(event.target as Node)
+      ) {
+        setDesktopProjectsDropdownOpen(false);
       }
     };
-    if (projectsDropdownOpen) {
+    if (desktopProjectsDropdownOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [projectsDropdownOpen]);
+  }, [desktopProjectsDropdownOpen]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -112,44 +117,50 @@ const Navbar = () => {
   const navTranslate = isFaded && !isCollapsed ? Math.min(-20, -(scrollY - FADE_THRESHOLD) / 2) : 0;
 
   const ProjectsDropdown = ({ isMobile = false }: { isMobile?: boolean }) => {
+    const isOpen = isMobile ? mobileProjectsDropdownOpen : desktopProjectsDropdownOpen;
+    const setIsOpen = isMobile ? setMobileProjectsDropdownOpen : setDesktopProjectsDropdownOpen;
     const triggerClass =
       "inline-flex items-center gap-1 px-4 py-3 rounded-xl transition-all duration-200 font-medium " +
       (isProjectsActive
         ? "bg-primary text-[rgb(26,30,36)]"
         : "text-primary hover:bg-primary/20 hover:translate-x-1");
 
+    const handleDesktopDropdownItemClick = () => {
+      setDesktopProjectsDropdownOpen(false);
+    };
+
+    const renderDropdownItem = (item: ProjectDropdownItem) => (
+      <>
+        <span>{item.label}</span>
+        {item.showGithubIcon && <FaGithub className="h-4 w-4 shrink-0" />}
+      </>
+    );
+
+    const renderProjectLink = (item: ProjectDropdownItem) => {
+      const commonProps = {
+        className: `${DROPDOWN_ITEM_CLASS} text-left`,
+        onClick: isMobile ? undefined : handleDesktopDropdownItemClick,
+      };
+
+      if (item.external) {
+        return (
+          <a href={item.href} target="_blank" rel="noopener noreferrer" {...commonProps}>
+            {renderDropdownItem(item)}
+          </a>
+        );
+      }
+
+      return (
+        <Link href={item.href} {...commonProps}>
+          {renderDropdownItem(item)}
+        </Link>
+      );
+    };
+
     const dropdownContent = (
       <ul className="absolute top-full left-0 mt-1 py-1 bg-[rgb(26,30,36)] border border-primary/30 rounded-lg shadow-xl z-50 min-w-[180px]">
         {PROJECT_DROPDOWN_ITEMS.map((item) => (
-          <li key={item.label}>
-            {item.external ? (
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={DROPDOWN_ITEM_CLASS}
-                onClick={() => {
-                  closeMobileMenu();
-                  setProjectsDropdownOpen(false);
-                }}
-              >
-                <span>{item.label}</span>
-                {item.showGithubIcon ? <FaGithub className="h-4 w-4 shrink-0" /> : <span className="w-4 h-4 shrink-0" />}
-              </a>
-            ) : (
-              <Link
-                href={item.href}
-                className={DROPDOWN_ITEM_CLASS}
-                onClick={() => {
-                  closeMobileMenu();
-                  setProjectsDropdownOpen(false);
-                }}
-              >
-                <span>{item.label}</span>
-                <span className="w-4 h-4 shrink-0" />
-              </Link>
-            )}
-          </li>
+          <li key={item.label}>{renderProjectLink(item)}</li>
         ))}
       </ul>
     );
@@ -158,68 +169,37 @@ const Navbar = () => {
       return (
         <>
           <button
-            onClick={() => setProjectsDropdownOpen(!projectsDropdownOpen)}
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
             className={`block w-full ${triggerClass} text-left`}
-            aria-expanded={projectsDropdownOpen}
+            aria-expanded={isOpen}
           >
             Projects
-            <CaretDown
-              className={`h-4 w-4 shrink-0 transition-transform ${projectsDropdownOpen ? "rotate-180" : ""}`}
-            />
+            <CaretDown className={`h-4 w-4 shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`} />
           </button>
-          {projectsDropdownOpen && (
-            <div className="relative mt-1 pl-2 border-l-2 border-primary/30">
+          {isOpen && (
+            <ul className="relative mt-1 pl-2 border-l-2 border-primary/30 flex flex-col gap-1 list-none">
               {PROJECT_DROPDOWN_ITEMS.map((item) => (
-                <div key={item.label} className="py-0.5">
-                  {item.external ? (
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={DROPDOWN_ITEM_CLASS}
-                      onClick={() => {
-                        closeMobileMenu();
-                        setProjectsDropdownOpen(false);
-                      }}
-                    >
-                      <span>{item.label}</span>
-                      {item.showGithubIcon ? <FaGithub className="h-4 w-4 shrink-0" /> : <span className="w-4 h-4 shrink-0" />}
-                    </a>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className={DROPDOWN_ITEM_CLASS}
-                      onClick={() => {
-                        closeMobileMenu();
-                        setProjectsDropdownOpen(false);
-                      }}
-                    >
-                      <span>{item.label}</span>
-                      <span className="w-4 h-4 shrink-0" />
-                    </Link>
-                  )}
-                </div>
+                <li key={item.label}>{renderProjectLink(item)}</li>
               ))}
-            </div>
+            </ul>
           )}
         </>
       );
     }
 
     return (
-      <li ref={projectsDropdownRef} className="relative">
+      <li ref={desktopProjectsDropdownRef} className="relative">
         <button
           type="button"
-          onClick={() => setProjectsDropdownOpen(!projectsDropdownOpen)}
+          onClick={() => setIsOpen(!isOpen)}
           className={triggerClass}
-          aria-expanded={projectsDropdownOpen}
+          aria-expanded={isOpen}
         >
           Projects
-          <CaretDown
-            className={`h-4 w-4 shrink-0 transition-transform ${projectsDropdownOpen ? "rotate-180" : ""}`}
-          />
+          <CaretDown className={`h-4 w-4 shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`} />
         </button>
-        {projectsDropdownOpen && dropdownContent}
+        {isOpen && dropdownContent}
       </li>
     );
   };
@@ -329,9 +309,9 @@ const Navbar = () => {
         </div>
       </header>
 
-      {/* Mobile menu overlay - slide-in from right */}
+      {/* Mobile menu overlay - slide-in from right (z-[60] above header so panel receives touches) */}
       <div
-        className={`fixed inset-0 z-40 md:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 z-[60] md:hidden transition-opacity duration-300 ${
           mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
@@ -341,19 +321,22 @@ const Navbar = () => {
           aria-hidden="true"
         />
         <div
-          className={`absolute top-0 right-0 h-full w-[min(85vw,320px)] bg-[rgb(26,30,36)] border-l border-primary/30 shadow-2xl transition-transform duration-300 ease-out ${
+          className={`absolute top-0 right-0 flex flex-col h-full w-[min(85vw,320px)] bg-[rgb(26,30,36)] border-l border-primary/30 shadow-2xl transition-transform duration-300 ease-out ${
             mobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <nav className="pt-20 px-4" onClick={(e) => e.stopPropagation()}>
+          <nav
+            className="flex-1 overflow-y-auto overscroll-contain pt-20 px-4 pb-6 min-h-0"
+            onClick={(e) => e.stopPropagation()}
+          >
             <ul className="flex flex-col gap-1 list-none p-0 m-0">
               {NAV_ITEMS.map((item, index) => {
                 const isActive = activeIndex === index;
                 const linkClass =
-                  "block px-4 py-3 rounded-xl transition-all duration-200 font-medium " +
+                  "block px-4 py-3 rounded-xl transition-all duration-200 font-medium cursor-pointer touch-manipulation " +
                   (isActive
                     ? "bg-primary text-[rgb(26,30,36)]"
-                    : "text-primary hover:bg-primary/20");
+                    : "text-primary hover:bg-primary/20 active:bg-primary/30");
                 return (
                   <li
                     key={item.label}
@@ -389,7 +372,7 @@ const Navbar = () => {
                   href={MEME_MONSTERS_LINK.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block rounded-xl transition-all duration-200"
+                  className="block rounded-xl transition-all duration-200 cursor-pointer touch-manipulation"
                   onClick={closeMobileMenu}
                 >
                   <GradientText
